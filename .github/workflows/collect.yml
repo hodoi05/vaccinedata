@@ -1,6 +1,8 @@
 name: collect data
 
 on:
+  schedule:
+    - cron: "07 2,5,6,12 * * *" 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -46,7 +48,19 @@ jobs:
 
       - name: fetch-de-divi
         run: python3 fetch-de-divi.py
+      
+      # Gnuplot plotting
+      - name: Gnuplot Install 
+        run: |
+          sudo apt-get update > /dev/null
+          sudo apt-get install gnuplot > /dev/null
           
+      - name: Gnuplot plotting
+        run: |
+          cd scripts-gnuplot
+          gnuplot all.gp
+          cd ..
+    
       - name: data commit new files
         run: |
           git config --local user.email "action@github.com"
