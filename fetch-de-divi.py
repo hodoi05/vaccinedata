@@ -78,7 +78,7 @@ def fetch_latest_csvs():
 
     assert len(d_csvs_to_fetch) > 0, "Error: no files to fetch"
     for filename, url in d_csvs_to_fetch.items():
-        cachefile = f"data/de-divi/downloaded/{filename}.csv"
+        cachefile = f"data/source/de-divi/{filename}.csv"
         cont = helper.read_url_or_cachefile(
             url=url, cachefile=cachefile, request_type='get', payload={}, cache_max_age=3600, verbose=True)
 
