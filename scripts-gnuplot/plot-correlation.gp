@@ -23,9 +23,9 @@ unset style # reset line styles/types to default
 
 
 date_last = system("tail -1 '../data/df_all.csv' | cut -f2")
-set label 1 label1_text_right."Datenquellen: https://github.com/entorb/COVID-19-Coronavirus-German-Regions/,\r\nhttps://github.com/ard-data/2020-rki-impf-archive,\r\nhttps://www.divi.de/divi-intensivregister-tagesreport-archiv-csv".date_last
+set label 1 label1_text_right."Datenquellen: https://github.com/entorb/COVID-19-Coronavirus-German-Regions/,\r\nhttps://github.com/ard-data/2020-rki-impf-archive,\r\nhttps://www.divi.de/divi-intensivregister-tagesreport-archiv-csv"
 
-title = "Verlauf Covid Infektion und Impfkampagne"
+title = "Verlauf Covid Infektionen und Impfkampagne (Stand: ".date_last.")"
 set title title
 set ylabel ""
 
@@ -56,7 +56,7 @@ plot \
 unset output
 
 
-title = "Verlauf Covid Infektion und Impfkampagne"
+title = "Normalisierter Verlauf Covid Infektionen und Impfkampagne (Stand: ".date_last.")"
 set title title
 set ylabel "normalisiert"
 
