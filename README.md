@@ -1,5 +1,5 @@
-# Wie gut wirken die Impfungen?
-## Qualitative Darstellung:
+# Überprüfung der Wirksamkeit der CoVid Impfkampagne in Deutschland auf Basis zugänglicher Daten
+## Qualitative Darstellung (regelmäßig aktualisiert)
 
 ![correlation_disease_vaccination_normalized.svg](plots-gnuplot/correlation_disease_vaccination_normalized.svg)
 
