@@ -1,4 +1,4 @@
-name: collect data
+name: plot data
 
 on:
   # Allows you to run this workflow manually from the Actions tab
