@@ -83,7 +83,7 @@ def read_json_file(filename: str):
 
 
 def write_json(filename: str, d: dict, sort_keys: bool = True, indent: int = 1):
-    with open(filename, mode='w+', encoding='utf-8', newline='\n') as fh:
+    with open(filename, mode='w', encoding='utf-8', newline='\n') as fh:
         json.dump(d, fh, ensure_ascii=False,
                   sort_keys=sort_keys, indent=indent)
 
