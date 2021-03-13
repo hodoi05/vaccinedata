@@ -194,8 +194,11 @@ def generate_database() -> dict:
             d_database_states2[bl_code].append(d)
     del d_database_states
 
-    #helper.write_json('data/out/de-bl/de-divi-V3-states.json',
-    helper.write_json('de-divi-V3-states.json',
+    import sys
+    import pathlib
+    print (f"Current path: {pathlib.Path().absolute()}")
+    #helper.write_json('de-divi-V3-states.json',
+    helper.write_json('data/out/de-bl/de-divi-V3-states.json',
                       d_database_states2, sort_keys=True, indent=1)
 
     return d_database_states2
