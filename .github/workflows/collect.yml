@@ -22,10 +22,10 @@ jobs:
           mkdir data
           mkdir data/source
           echo Retrieve data for total number of infections and DIVI data from https://github.com/entorb/COVID-19-Coronavirus-German-Regions/blob/master/data/de-states/de-state-DE-total.tsv,
-          wget -o data/source/de-state-DE-total-infections-divi.tsv https://github.com/entorb/COVID-19-Coronavirus-German-Regions/blob/master/data/de-states/de-state-DE-total.tsv
+          wget -O data/source/de-state-DE-total-infections-divi.tsv https://github.com/entorb/COVID-19-Coronavirus-German-Regions/blob/master/data/de-states/de-state-DE-total.tsv
           
           echo Retrieve vaccinination rates from https://raw.githubusercontent.com/ard-data/2020-rki-impf-archive/master/data/9_csv_v2/all.csv
-          wget -o data/source/all-vaccine.csv https://raw.githubusercontent.com/ard-data/2020-rki-impf-archive/master/data/9_csv_v2/all.csv
+          wget -O data/source/all-vaccine.csv https://raw.githubusercontent.com/ard-data/2020-rki-impf-archive/master/data/9_csv_v2/all.csv
           
       - name: data commit new files
         run: |
