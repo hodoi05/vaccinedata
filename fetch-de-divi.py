@@ -194,7 +194,7 @@ def generate_database() -> dict:
             d_database_states2[bl_code].append(d)
     del d_database_states
 
-    helper.write_json('cache/de-divi/de-divi-V3-states.json',
+    helper.write_json('out/de-bl/de-divi-V3-states.json',
                       d_database_states2, sort_keys=True, indent=1)
 
     return d_database_states2
@@ -221,6 +221,6 @@ def export_tsv(d_database):
 
 fetch_latest_csvs()
 d_database = generate_database()
-export_tsv(d_database)
+//export_tsv(d_database)
 
 pass
