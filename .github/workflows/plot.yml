@@ -21,6 +21,8 @@ jobs:
         run: |
           sudo apt-get update > /dev/null
           sudo apt-get install gnuplot > /dev/null
+          mkdir scripts-gnuplot
+          
       - name: Gnuplot plotting
         run: |
           cd scripts-gnuplot
