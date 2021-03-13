@@ -19,8 +19,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run data collection
         run: |
-          mkdir data
-          mkdir data/source
           echo Retrieve data for total number of infections and DIVI data from https://github.com/entorb/COVID-19-Coronavirus-German-Regions/blob/master/data/de-states/de-state-DE-total.tsv,
           wget -O data/source/de-state-DE-total-infections-divi.tsv https://github.com/entorb/COVID-19-Coronavirus-German-Regions/blob/master/data/de-states/de-state-DE-total.tsv
           
