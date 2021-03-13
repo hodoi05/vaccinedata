@@ -1,0 +1,17 @@
+--2021-03-13 07:33:29--  https://github.com/entorb/COVID-19-Coronavirus-German-Regions/blob/master/data/de-states/de-state-DE-total.tsv
+Resolving github.com (github.com)... 140.82.113.3
+Connecting to github.com (github.com)|140.82.113.3|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘de-state-DE-total.tsv’
+
+     0K .......... .......... .......... .......... .......... 86.5M
+    50K .......... .......... .......... .......... .......... 14.0M
+   100K .......... .......... .......... .......... .......... 16.3M
+   150K .......... .......... .......... .......... .......... 14.7M
+   200K .......... .......... .......... .......... .......... 21.7M
+   250K .......... .......... .......... .......... .......... 23.7M
+   300K .......... .......... .......... .......... ....       20.9M=0.02s
+
+2021-03-13 07:33:29 (20.1 MB/s) - ‘de-state-DE-total.tsv’ saved [352836]
+
