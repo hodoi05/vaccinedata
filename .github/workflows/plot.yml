@@ -22,6 +22,7 @@ jobs:
           sudo apt-get update > /dev/null
           sudo apt-get install gnuplot > /dev/null
           mkdir scripts-gnuplot
+          echo x > scripts-gnuplot/plot-de-states-timeseries-joined.gp
           
       - name: Gnuplot plotting
         run: |
