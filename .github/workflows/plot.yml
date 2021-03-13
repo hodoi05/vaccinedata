@@ -24,11 +24,11 @@ jobs:
           mkdir scripts-gnuplot
           echo x > scripts-gnuplot/plot-de-states-timeseries-joined.gp
           
-      - name: Gnuplot plotting
-        run: |
-          cd scripts-gnuplot
-          gnuplot all.gp
-          cd ..
+      #- name: Gnuplot plotting
+      #  run: |
+      #    cd scripts-gnuplot
+      #    gnuplot all.gp
+      #    cd ..
         
       - name: data commit new files
         run: |
