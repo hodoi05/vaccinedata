@@ -221,6 +221,6 @@ def export_tsv(d_database):
 
 fetch_latest_csvs()
 d_database = generate_database()
-//export_tsv(d_database)
+#export_tsv(d_database)
 
 pass
