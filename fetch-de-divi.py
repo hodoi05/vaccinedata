@@ -17,6 +17,7 @@ import re
 import csv
 import glob
 import requests  # for read_url_or_cachefile
+import pandas as pd
 
 # my helper modules
 import helper
@@ -84,11 +85,9 @@ def fetch_latest_csvs():
 
 
 def generate_database() -> dict:
-    d_database = {}
-    # d_database_states = {}  # Bundesländer
     d_database_states = {'01': {}, '02': {}, '03': {}, '04': {}, '05': {}, '06': {}, '07': {
     }, '08': {}, '09': {}, '10': {}, '11': {}, '12': {}, '13': {}, '14': {}, '15': {}, '16': {}, 'DE-total': {}}
-    for csv_file in glob.glob('data/de-divi/downloaded/*.csv'):
+    for csv_file in glob.glob('data/source/de-divi/*.csv'):
         (filepath, fileName) = os.path.split(csv_file)
         (fileBaseName, fileExtension) = os.path.splitext(fileName)
         date = fileBaseName
@@ -113,7 +112,6 @@ def generate_database() -> dict:
             for row in csv_reader:
                 assert len(row) >= 8, "Error: too few rows found"
                 bl_id = row["bundesland"]
-                lk_id = row["gemeindeschluessel"]
                 d = {
                     # "bl_id": row["bundesland"],
                     # "lk_id": row["gemeindeschluessel"],
@@ -126,32 +124,16 @@ def generate_database() -> dict:
                     "betten_belegt": int(float(row["betten_belegt"]))
                 }
                 d["betten_ges"] = d["betten_frei"] + d["betten_belegt"]
-                if d["betten_ges"] > 0:
-                    d["betten_belegt_proz"] = round(100 *
-                                                    d["betten_belegt"] / d["betten_ges"], 1)
-                    d["faelle_covid_aktuell_proz"] = round(100*d["faelle_covid_aktuell"] /
-                                                           d["betten_ges"], 1)
-                else:
-                    d["betten_belegt_proz"] = None
-                    d["faelle_covid_aktuell_proz"] = None
-                if d["faelle_covid_aktuell"] > 0:
-                    d["faelle_covid_aktuell_beatmet_proz"] = round(
-                        100*d["faelle_covid_aktuell_beatmet"] / d["faelle_covid_aktuell"], 1)
-                else:
-                    d["faelle_covid_aktuell_beatmet_proz"] = 0
+
 
                 # if "daten_stand" in row:
                 #     d["daten_stand"] = row["daten_stand"]
                 # else:
                 #     d["daten_stand"] = date
 
-                if lk_id not in d_database:
-                    d_database[lk_id] = []
-                d_database[lk_id].append(d)
-
                 # calc de_states_sum
                 d2 = dict(d)
-                del d2['Date'], d2['betten_ges'], d2['betten_belegt_proz'], d2['faelle_covid_aktuell_proz'], d2['faelle_covid_aktuell_beatmet_proz']
+                del d2['Date']
                 if date not in d_database_states[bl_id]:
                     d_database_states[bl_id][date] = d2
                 else:
@@ -163,68 +145,63 @@ def generate_database() -> dict:
                 else:
                     for k in d2.keys():
                         d_database_states['DE-total'][date][k] += d2[k]
+                d2['Date']=date                
+                # print(d_database_states[bl_id][date])
 
-                    # print(d_database_states[bl_id][date])
-
-    helper.write_json('cache/de-divi/de-divi-V3.json',
-                      d_database, sort_keys=True, indent=1)
-
-    d_database_states2 = {}
-    for bl_id in d_database_states.keys():
-        bl_code = d_bl_id2code[bl_id]
-        d_database_states2[bl_code] = []
-        for date, d in d_database_states[bl_id].items():
-            d['Date'] = date
-            # copy from above:
-            d["betten_ges"] = d["betten_frei"] + d["betten_belegt"]
-            if d["betten_ges"] > 0:
-                d["betten_belegt_proz"] = round(100 *
-                                                d["betten_belegt"] / d["betten_ges"], 1)
-                d["faelle_covid_aktuell_proz"] = round(100*d["faelle_covid_aktuell"] /
-                                                       d["betten_ges"], 1)
-            else:
-                d["betten_belegt_proz"] = None
-                d["faelle_covid_aktuell_proz"] = None
-            if d["faelle_covid_aktuell"] > 0:
-                d["faelle_covid_aktuell_beatmet_proz"] = round(
-                    100*d["faelle_covid_aktuell_beatmet"] / d["faelle_covid_aktuell"], 1)
-            else:
-                d["faelle_covid_aktuell_beatmet_proz"] = 0
-
-            d_database_states2[bl_code].append(d)
-    del d_database_states
-
-    import sys
-    import pathlib
-    print (f"Current path: {pathlib.Path().absolute()}")
-    #helper.write_json('de-divi-V3-states.json',
-    helper.write_json('data/out/de-bl/de-divi-V3-states.json',
-                      d_database_states2, sort_keys=True, indent=1)
-
-    return d_database_states2
+    return d_database_states
 
 
-def export_tsv(d_database):
+def export_csv(d_database):
     for bl_id, l_time_series in d_database.items():
-        fileOut = f"data/out/de-bl/{bl_id}"
-        with open(fileOut+'.tsv', mode='w', encoding='utf-8', newline='\n') as fh:
-            csvwriter = csv.DictWriter(fh, delimiter='\t', extrasaction='ignore', fieldnames=[
+        fileOut = f"data/source/de-divi-bl/{bl_id}"
+        with open(fileOut+'.csv', mode='w', encoding='utf-8', newline='\n') as fh:
+            csvwriter = csv.DictWriter(fh, delimiter=',', extrasaction='ignore', fieldnames=[
                 'Date',
                 'betten_ges',
                 'betten_belegt',
-                'betten_belegt_proz',
                 'faelle_covid_aktuell',
-                'faelle_covid_aktuell_proz',
-                'faelle_covid_aktuell_beatmet',
-                'faelle_covid_aktuell_beatmet_proz'])
+                'faelle_covid_aktuell_beatmet'])
             csvwriter.writeheader()
             for d in l_time_series:
-                csvwriter.writerow(d)
+                csvwriter.writerow(l_time_series[d])
     pass
 
 
 fetch_latest_csvs()
 d_database = generate_database()
-#export_tsv(d_database)
+export_csv(d_database)
+
+df_divi = pd.read_csv('data/source/de-divi-bl/DE-total.csv')
+df_divi = df_divi.rename(columns={"faelle_covid_aktuell":"Intensiv-CoV-Patienten"})
+df_divi = df_divi.rename(columns={"faelle_covid_aktuell_beatmet":"Beatmete CoV-Patienten"})
+df_vaccine = pd.read_csv('data/source/all-vaccine.csv')
+df_vaccine = df_vaccine.rename(columns={"date":"Date"})
+df_vaccine_DE = df_vaccine[df_vaccine["region"]== "DE"]
+df_vaccine_personen_erst = df_vaccine_DE[df_vaccine_DE["metric"] == 'personen_erst_kumulativ'].reset_index(drop=True)
+df_vaccine_personen_erst = df_vaccine_personen_erst.rename(columns={"value":"Personen mit Erstimpfung"})
+df_vaccine_personen_voll = df_vaccine_DE[df_vaccine_DE["metric"] == "personen_voll_kumulativ"].reset_index(drop=True)
+df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"value":"Personen mit Vollschutz"})
+df_infections = pd.read_csv('data/source/de-state-DE-total-infections.tsv', sep='\t')
+
+df_all = df_infections
+df_all = pd.merge(df_all, df_divi, on='Date', how='left')
+df_all = pd.merge(df_all, df_vaccine_personen_erst, on='Date', how='left')
+df_all = pd.merge(df_all, df_vaccine_personen_voll, on='Date', how='left')
+
+df_all = df_all.rename(columns={"Date":"Datum"})
+df_all = df_all.rename(columns={"Cases_Last_Week":"CoV-Infektionen pro Woche"})
+df_all = df_all.rename(columns={"Deaths_Last_Week":"Todesfälle mit CoV pro Woche"})
+df_all = df_all[[ 'Datum', 'CoV-Infektionen pro Woche', 'Cases', 'Intensiv-CoV-Patienten', 'Beatmete CoV-Patienten', 'Todesfälle mit CoV pro Woche', 'Personen mit Erstimpfung', 'Personen mit Vollschutz']]
+df_all = df_all.sort_values(by = 'Datum')
+
+df_all.to_csv('data/df_all.csv', index=False)
+
+
+df_min_max_scaled = df_all.copy()
+# apply normalization techniques by Column 1 
+for column in ['CoV-Infektionen pro Woche', 'Cases', 'Intensiv-CoV-Patienten', 'Beatmete CoV-Patienten', 'Todesfälle mit CoV pro Woche', 'Personen mit Erstimpfung', 'Personen mit Vollschutz']:
+    df_min_max_scaled[column] = (df_min_max_scaled[column] - df_min_max_scaled[column].min()) / (df_min_max_scaled[column].max() - df_min_max_scaled[column].min())     
+
+df_min_max_scaled.to_csv('data/df_all_min_max_scaled.csv', index=False)
 
 pass

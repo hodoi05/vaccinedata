@@ -35,18 +35,12 @@ from scipy.optimize import curve_fit
 
 # ensure all output folders are present
 os.makedirs('cache', exist_ok=True)
-os.makedirs('cache/de-districts/', exist_ok=True)
 os.makedirs('cache/de-divi/', exist_ok=True)
-os.makedirs('cache/de-states/', exist_ok=True)
-os.makedirs('cache/int/', exist_ok=True)
-os.makedirs('data/de-districts/latest/', exist_ok=True)
+os.makedirs('data/source/de-divi', exist_ok=True)
+os.makedirs('data/source/de-divi-bl', exist_ok=True)
 os.makedirs('plots-gnuplot/', exist_ok=True)
-os.makedirs('plots-gnuplot/de-districts/', exist_ok=True)
-os.makedirs('plots-gnuplot/de-divi/', exist_ok=True)
-os.makedirs('plots-gnuplot/de-states/', exist_ok=True)
-os.makedirs('plots-gnuplot/int/', exist_ok=True)
 os.makedirs('plots-python/', exist_ok=True)
-os.makedirs('maps/out/de-districts/', exist_ok=True)
+
 
 
 #
