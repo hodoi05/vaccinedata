@@ -196,34 +196,37 @@ def df_addcol_peakrefrelatedratio(df,col_a, col_b, col_deltaratio):
 
 
 def calc_efficiency(df):
-   df = df_addcol_peakrefrelatedratio(df, col_infections, col_intensiv, col_ref_intensiv)
-   df = df_addcol_peakrefrelatedratio(df, col_infections, col_beatmet, col_ref_beatmet)
-   df = df_addcol_peakrefrelatedratio(df, col_infections, col_tod, col_ref_tod)
-  
+   df = df_addcol_peakrefrelatedratio(df, col_infections, col_intensiv, col_ratio_intensiv)
+   df = df_addcol_peakrefrelatedratio(df, col_infections, col_beatmet, col_ratio_beatmet)
+   df = df_addcol_peakrefrelatedratio(df, col_infections, col_tod, col_ratio_tod)
+   return df
  
 fetch_latest_csvs()
 d_database = generate_database()
 export_csv(d_database)
 
 df_divi = pd.read_csv('data/source/de-divi-bl/DE-total.csv')
-df_divi = df_divi.rename(columns={"faelle_covid_aktuell":"Intensiv-CoV-Patienten"})
-df_divi = df_divi.rename(columns={"faelle_covid_aktuell_beatmet":"Beatmete CoV-Patienten"})
+df_divi = df_divi.rename(columns={"faelle_covid_aktuell":col_intensiv})
+df_divi = df_divi.rename(columns={"faelle_covid_aktuell_beatmet":col_beatmet})
 df_vaccine = pd.read_csv('data/source/all-vaccine.csv')
-df_vaccine = df_vaccine.rename(columns={"date":"Date"})
-df_vaccine_DE = df_vaccine[df_vaccine["region"]== "DE"]
+df_vaccine = df_vaccine.rename(columns={"date":'Date'})
+df_vaccine_DE = df_vaccine[df_vaccine["region"] == "DE"]
 df_vaccine_personen_erst = df_vaccine_DE[df_vaccine_DE["metric"] == 'personen_erst_kumulativ'].reset_index(drop=True)
-df_vaccine_personen_erst = df_vaccine_personen_erst.rename(columns={"value":"Personen mit Erstimpfung"})
+df_vaccine_personen_erst = df_vaccine_personen_erst.rename(columns={"value":col_erstimpfung})
 df_vaccine_personen_voll = df_vaccine_DE[df_vaccine_DE["metric"] == "personen_voll_kumulativ"].reset_index(drop=True)
-df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"value":"Personen mit Vollschutz"})
+df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"value":col_vollschutz})
 df_infections = pd.read_csv('data/source/de-state-DE-total-infections.tsv', sep='\t')
 
 df_all = pd.merge(df_all, df_divi, on='Date', how='left')
 df_all = pd.merge(df_all, df_vaccine_personen_erst, on='Date', how='left')
 df_all = pd.merge(df_all, df_vaccine_personen_voll, on='Date', how='left')
 
-df_all = df_all.rename(columns={"Date":"Datum"})
-df_all = df_all.rename(columns={"Cases_Last_Week":"CoV-Infektionen pro Woche"})
-df_all = df_all.rename(columns={"Deaths_Last_Week":"Todesfälle mit CoV pro Woche"})
+df_all = df_all.rename(columns={"Date":col_date})
+df_all = df_all.rename(columns={"Cases_Last_Week":col_infectionsperweek})
+df_all = df_all.rename(columns={"Deaths_Last_Week":col_tod})
+
+df_all = calc_efficiency(df_all)
+
 df_all = df_all[[col_date,
   col_infectionsperweek,
   col_infections,
@@ -236,14 +239,22 @@ df_all = df_all[[col_date,
   col_ratio_beatmet,
   col_ratio_tod]]
 
-df_all = df_all.sort_values(by = 'Datum')
+df_all = df_all.sort_values(by = col_date)
 
 df_all.to_csv('data/df_all.csv', index=False)
 
-
 df_min_max_scaled = df_all.copy()
 # apply normalization techniques by Column 1 
-for column in ['CoV-Infektionen pro Woche', 'Cases', 'Intensiv-CoV-Patienten', 'Beatmete CoV-Patienten', 'Todesfälle mit CoV pro Woche', 'Personen mit Erstimpfung', 'Personen mit Vollschutz']:
+for column in [col_infectionsperweek,
+  col_infections,
+  col_intensiv,
+  col_beatmet,
+  col_tod,
+  col_erstimpfung,
+  col_vollschutz,
+  col_ratio_intensiv,
+  col_ratio_beatmet,
+  col_ratio_tod]:
     df_min_max_scaled[column] = (df_min_max_scaled[column] - df_min_max_scaled[column].min()) / (df_min_max_scaled[column].max() - df_min_max_scaled[column].min())     
 
 df_min_max_scaled.to_csv('data/df_all_min_max_scaled.csv', index=False)
