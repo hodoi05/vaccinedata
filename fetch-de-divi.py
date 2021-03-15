@@ -183,11 +183,11 @@ def df_addcol_peakrefrelatedratio(df,col_a, col_b, col_deltaratio):
   deltat = peakdate_b - peakdate_a
  
   col_refval = f'{col_b} peak referenced'
-  df_ref = df[[ col_date, col_a].copy()
+  df_ref = df[[ col_date, col_a]].copy()
   df_deltat = df[[col_date, col_b]].copy()
   df_deltat[col_date] = df_deltat[col_date]-deltat
   df_deltat = df_deltat.rename(columns={col_b:col_refval})
-  df = pd.merge(df_ref, df_deltat, on=col_date, how='left')
+  df = pd.merge(df, df_deltat, on=col_date, how='left')
 
   df[col_deltaratio] = df[col_b] / df[col_a]
 
@@ -196,9 +196,9 @@ def df_addcol_peakrefrelatedratio(df,col_a, col_b, col_deltaratio):
 
 
 def calc_efficiency(df):
-   df = df_addcol_peakrefrelatedratio(df, col_infections, col_intensiv, col_ratio_intensiv)
-   df = df_addcol_peakrefrelatedratio(df, col_infections, col_beatmet, col_ratio_beatmet)
-   df = df_addcol_peakrefrelatedratio(df, col_infections, col_tod, col_ratio_tod)
+   df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_intensiv, col_ratio_intensiv)
+   df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_beatmet, col_ratio_beatmet)
+   df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_tod, col_ratio_tod)
    return df
  
 fetch_latest_csvs()
@@ -217,7 +217,7 @@ df_vaccine_personen_voll = df_vaccine_DE[df_vaccine_DE["metric"] == "personen_vo
 df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"value":col_vollschutz})
 df_infections = pd.read_csv('data/source/de-state-DE-total-infections.tsv', sep='\t')
 
-df_all = pd.merge(df_all, df_divi, on='Date', how='left')
+df_all = pd.merge(df_infections, df_divi, on='Date', how='left')
 df_all = pd.merge(df_all, df_vaccine_personen_erst, on='Date', how='left')
 df_all = pd.merge(df_all, df_vaccine_personen_voll, on='Date', how='left')
 
@@ -225,6 +225,7 @@ df_all = df_all.rename(columns={"Date":col_date})
 df_all = df_all.rename(columns={"Cases_Last_Week":col_infectionsperweek})
 df_all = df_all.rename(columns={"Deaths_Last_Week":col_tod})
 
+df_all[col_date] = pd.to_datetime(df_all[col_date])
 df_all = calc_efficiency(df_all)
 
 df_all = df_all[[col_date,
