@@ -22,6 +22,17 @@ import pandas as pd
 # my helper modules
 import helper
 
+col_date='Datum'
+col_infectionsperweek='CoV-Infektionen pro Woche'
+col_infections='Cases'
+col_intensiv='Intensiv-CoV-Patienten'
+col_beatmet='Beatmete CoV-Patienten'
+col_tod='Todesfälle mit CoV pro Woche'
+col_erstimpfung='Personen mit Erstimpfung'
+col_vollschutz='Personen mit Vollschutz'
+col_ratio_intensiv='Verhältnis Intensivpatienten/Infektionen (mit deltaT)'
+col_ratio_beatmet='Verhältnis beatmete Patienten/Infektionen (mit deltaT)'
+col_ratio_tod='Verhältnis Todesfälle/Infektionen (mit deltaT)'
 
 def extractLinkList(cont: str) -> list:
     # myPattern = '<a href="(/divi-intensivregister-tagesreport-archiv-csv/divi-intensivregister-[^"]+/download)"'
@@ -166,7 +177,30 @@ def export_csv(d_database):
                 csvwriter.writerow(l_time_series[d])
     pass
 
+def df_addcol_peakrefrelatedratio(df,col_a, col_b, col_deltaratio):
+  peakdate_a = df[df[col_a]==df[col_a].max()][col_date].min()
+  peakdate_b = df[df[col_b]==df[col_b].max()][col_date].min()
+  deltat = peakdate_b - peakdate_a
+ 
+  col_refval = f'{col_b} peak referenced'
+  df_ref = df[[ col_date, col_a].copy()
+  df_deltat = df[[col_date, col_b]].copy()
+  df_deltat[col_date] = df_deltat[col_date]-deltat
+  df_deltat = df_deltat.rename(columns={col_b:col_refval})
+  df = pd.merge(df_ref, df_deltat, on=col_date, how='left')
 
+  df[col_deltaratio] = df[col_b] / df[col_a]
+
+  return df
+
+
+
+def calc_efficiency(df):
+   df = df_addcol_peakrefrelatedratio(df, col_infections, col_intensiv, col_ref_intensiv)
+   df = df_addcol_peakrefrelatedratio(df, col_infections, col_beatmet, col_ref_beatmet)
+   df = df_addcol_peakrefrelatedratio(df, col_infections, col_tod, col_ref_tod)
+  
+ 
 fetch_latest_csvs()
 d_database = generate_database()
 export_csv(d_database)
@@ -183,7 +217,6 @@ df_vaccine_personen_voll = df_vaccine_DE[df_vaccine_DE["metric"] == "personen_vo
 df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"value":"Personen mit Vollschutz"})
 df_infections = pd.read_csv('data/source/de-state-DE-total-infections.tsv', sep='\t')
 
-df_all = df_infections
 df_all = pd.merge(df_all, df_divi, on='Date', how='left')
 df_all = pd.merge(df_all, df_vaccine_personen_erst, on='Date', how='left')
 df_all = pd.merge(df_all, df_vaccine_personen_voll, on='Date', how='left')
@@ -191,7 +224,18 @@ df_all = pd.merge(df_all, df_vaccine_personen_voll, on='Date', how='left')
 df_all = df_all.rename(columns={"Date":"Datum"})
 df_all = df_all.rename(columns={"Cases_Last_Week":"CoV-Infektionen pro Woche"})
 df_all = df_all.rename(columns={"Deaths_Last_Week":"Todesfälle mit CoV pro Woche"})
-df_all = df_all[[ 'Datum', 'CoV-Infektionen pro Woche', 'Cases', 'Intensiv-CoV-Patienten', 'Beatmete CoV-Patienten', 'Todesfälle mit CoV pro Woche', 'Personen mit Erstimpfung', 'Personen mit Vollschutz']]
+df_all = df_all[[col_date,
+  col_infectionsperweek,
+  col_infections,
+  col_intensiv,
+  col_beatmet,
+  col_tod,
+  col_erstimpfung,
+  col_vollschutz,
+  col_ratio_intensiv,
+  col_ratio_beatmet,
+  col_ratio_tod]]
+
 df_all = df_all.sort_values(by = 'Datum')
 
 df_all.to_csv('data/df_all.csv', index=False)
