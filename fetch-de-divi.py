@@ -18,6 +18,7 @@ import csv
 import glob
 import requests  # for read_url_or_cachefile
 import pandas as pd
+import numpy as np 
 
 # my helper modules
 import helper
@@ -33,6 +34,8 @@ col_vollschutz='Personen mit Vollschutz'
 col_ratio_intensiv='Verhältnis Intensivpatienten/Infektionen (mit deltaT)'
 col_ratio_beatmet='Verhältnis beatmete Patienten/Infektionen (mit deltaT)'
 col_ratio_tod='Verhältnis Todesfälle/Infektionen (mit deltaT)'
+
+all_deltat={}
 
 def extractLinkList(cont: str) -> list:
     # myPattern = '<a href="(/divi-intensivregister-tagesreport-archiv-csv/divi-intensivregister-[^"]+/download)"'
@@ -182,23 +185,33 @@ def df_addcol_peakrefrelatedratio(df,col_a, col_b, col_deltaratio):
   peakdate_b = df[df[col_b]==df[col_b].max()][col_date].min()
   deltat = peakdate_b - peakdate_a
  
-  col_refval = f'{col_b} peak referenced'
-  df_ref = df[[ col_date, col_a]].copy()
+  col_refval = f'{col_b} -{deltat}d (peak matched)'
   df_deltat = df[[col_date, col_b]].copy()
   df_deltat[col_date] = df_deltat[col_date]-deltat
   df_deltat = df_deltat.rename(columns={col_b:col_refval})
   df = pd.merge(df, df_deltat, on=col_date, how='left')
 
-  df[col_deltaratio] = df[col_b] / df[col_a]
+  df[col_deltaratio] = df[col_refval] / df[col_a]
+    
+  all_deltat[col_b] = deltat
 
   return df
-
-
 
 def calc_efficiency(df):
    df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_intensiv, col_ratio_intensiv)
    df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_beatmet, col_ratio_beatmet)
    df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_tod, col_ratio_tod)
+   # Pre 2020-04-15 not ennough data has been gathered => set to nan
+   df[col_ratio_tod][df[col_date] < pd.to_datetime('2020-04-15')] = np.nan
+
+   fileOut = "data/peak_delta.txt"
+   with open(fileOut, mode='w', encoding='utf-8', newline='\n') as fh:
+      fh.write(
+         f"deltaT: Infektion-Intensiv:{all_deltat[col_intensiv]}d, "
+         "Infektion-Beatmung: {all_deltat[col_beatmet]}d, "
+         "Infektion-Tod: {all_deltat[col_tod]}d"
+      )
+     
    return df
  
 fetch_latest_csvs()
@@ -206,26 +219,27 @@ d_database = generate_database()
 export_csv(d_database)
 
 df_divi = pd.read_csv('data/source/de-divi-bl/DE-total.csv')
-df_divi = df_divi.rename(columns={"faelle_covid_aktuell":col_intensiv})
-df_divi = df_divi.rename(columns={"faelle_covid_aktuell_beatmet":col_beatmet})
 df_vaccine = pd.read_csv('data/source/all-vaccine.csv')
 df_vaccine = df_vaccine.rename(columns={"date":'Date'})
 df_vaccine_DE = df_vaccine[df_vaccine["region"] == "DE"]
-df_vaccine_personen_erst = df_vaccine_DE[df_vaccine_DE["metric"] == 'personen_erst_kumulativ'].reset_index(drop=True)
-df_vaccine_personen_erst = df_vaccine_personen_erst.rename(columns={"value":col_erstimpfung})
-df_vaccine_personen_voll = df_vaccine_DE[df_vaccine_DE["metric"] == "personen_voll_kumulativ"].reset_index(drop=True)
-df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"value":col_vollschutz})
+df_vaccine_personen_erst = df_vaccine_DE[df_vaccine_DE["metric"] == 'personen_erst_kumulativ'].copy().reset_index(drop=True)
+df_vaccine_personen_voll = df_vaccine_DE[df_vaccine_DE["metric"] == "personen_voll_kumulativ"].copy().reset_index(drop=True)
 df_infections = pd.read_csv('data/source/de-state-DE-total-infections.tsv', sep='\t')
 
 df_all = pd.merge(df_infections, df_divi, on='Date', how='left')
+df_vaccine_personen_erst = df_vaccine_personen_erst.rename(columns={"value":col_erstimpfung})
 df_all = pd.merge(df_all, df_vaccine_personen_erst, on='Date', how='left')
+df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"value":col_vollschutz})
 df_all = pd.merge(df_all, df_vaccine_personen_voll, on='Date', how='left')
 
 df_all = df_all.rename(columns={"Date":col_date})
 df_all = df_all.rename(columns={"Cases_Last_Week":col_infectionsperweek})
 df_all = df_all.rename(columns={"Deaths_Last_Week":col_tod})
+df_all = df_all.rename(columns={"faelle_covid_aktuell":col_intensiv})
+df_all = df_all.rename(columns={"faelle_covid_aktuell_beatmet":col_beatmet})
 
 df_all[col_date] = pd.to_datetime(df_all[col_date])
+
 df_all = calc_efficiency(df_all)
 
 df_all = df_all[[col_date,
@@ -252,8 +266,12 @@ for column in [col_infectionsperweek,
   col_beatmet,
   col_tod,
   col_erstimpfung,
-  col_vollschutz,
-  col_ratio_intensiv,
+  col_vollschutz]:
+    df_min_max_scaled[column] = (df_min_max_scaled[column] - df_min_max_scaled[column].min()) / (df_min_max_scaled[column].max() - df_min_max_scaled[column].min())     
+
+df_min_max_scaled = calc_efficiency(df_min_max_scaled)
+
+for column in [col_ratio_intensiv,
   col_ratio_beatmet,
   col_ratio_tod]:
     df_min_max_scaled[column] = (df_min_max_scaled[column] - df_min_max_scaled[column].min()) / (df_min_max_scaled[column].max() - df_min_max_scaled[column].min())     
