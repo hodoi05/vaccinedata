@@ -1,0 +1,1 @@
+deltaT: Infektion-Intensiv:10 days 00:00:00d, Infektion-Beatmung: {all_deltat[col_beatmet]}d, Infektion-Tod: {all_deltat[col_tod]}d
