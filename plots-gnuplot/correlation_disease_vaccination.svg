@@ -130,7 +130,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(426.9,31.0)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-03-18)</tspan></text>
+		<text><tspan font-family="Arial" >Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-03-19)</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -194,7 +194,7 @@
 		L672.2,459.9 L673.9,459.9 L675.5,459.9 L677.2,459.9 L678.9,459.9 L680.5,459.9 L682.2,459.9 L683.8,459.9
 		L685.5,459.9 L687.1,459.9 L688.8,459.9 L690.5,459.9 L692.1,459.9 L693.8,459.9 L695.4,459.9 L697.1,459.9
 		L698.7,459.9 L700.4,459.9 L702.1,459.9 L703.7,459.9 L705.4,459.9 L707.0,459.9 L708.7,459.9 L710.4,459.9
-		L712.0,459.9 L713.7,459.9 L715.3,459.9  '/></g>
+		L712.0,459.9 L713.7,459.9 L715.3,459.9 L717.0,459.9  '/></g>
 	</g>
 	<g id="gnuplot_plot_2" ><title>CoV-Infektionen pro Woche</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -251,7 +251,7 @@
 		L672.2,360.6 L673.9,357.4 L675.5,357.5 L677.2,357.5 L678.9,356.6 L680.5,353.2 L682.2,351.3 L683.8,350.1
 		L685.5,349.7 L687.1,348.9 L688.8,348.8 L690.5,346.7 L692.1,346.7 L693.8,345.5 L695.4,345.9 L697.1,345.4
 		L698.7,344.9 L700.4,344.2 L702.1,344.0 L703.7,339.0 L705.4,334.4 L707.0,328.0 L708.7,322.5 L710.4,319.2
-		L712.0,316.7 L713.7,307.9 L715.3,301.4  '/></g>
+		L712.0,316.7 L713.7,307.9 L715.3,301.4 L717.0,291.9  '/></g>
 	</g>
 	<g id="gnuplot_plot_3" ><title>Cases</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
