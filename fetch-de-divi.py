@@ -209,7 +209,7 @@ def calc_efficiency(df):
    # Pre 2020-04-15 not ennough data has been gathered => set to nan
    df[col_ratio_tod][df[col_date] < pd.to_datetime('2020-04-15')] = np.nan
 
-   fileOut = "data/peak_delta.txt"
+   fileOut = "data/peak_deltat.txt"
    with open(fileOut, mode='w', encoding='utf-8', newline='\n') as fh:
       fh.write(
          f"deltaT: Infektion-Intensiv:{all_deltat[col_intensiv]}d, "
