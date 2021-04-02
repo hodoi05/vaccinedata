@@ -18,7 +18,8 @@ import csv
 import glob
 import requests  # for read_url_or_cachefile
 import pandas as pd
-import numpy as np 
+import numpy as np
+import datetime
 
 # my helper modules
 import helper
@@ -126,13 +127,17 @@ def generate_database() -> dict:
             for row in csv_reader:
                 assert len(row) >= 8, "Error: too few rows found"
                 bl_id = row["bundesland"]
+                divi_col_beatmet="faelle_covid_aktuell_invasiv_beatmet"
+                datetime_date = datetime.datetime.strptime(date, "%Y-%m-%d")
+                if datetime_date < datetime.datetime(2021,3,31):           
+                    divi_col_beatmet = "faelle_covid_aktuell_beatmet"
                 d = {
                     # "bl_id": row["bundesland"],
                     # "lk_id": row["gemeindeschluessel"],
                     "Date": date,
                     "anzahl_meldebereiche": int(row["anzahl_meldebereiche"]),
                     "faelle_covid_aktuell": int(row["faelle_covid_aktuell"]),
-                    "faelle_covid_aktuell_beatmet": int(row["faelle_covid_aktuell_beatmet"]),
+                    "faelle_covid_aktuell_beatmet": int(row[divi_col_beatmet]),
                     "anzahl_standorte": int(row["anzahl_standorte"]),
                     "betten_frei": int(float(row["betten_frei"])),
                     "betten_belegt": int(float(row["betten_belegt"]))
@@ -192,8 +197,8 @@ def df_addcol_peakrefrelatedratio(df,col_a, col_b, col_deltaratio):
   df = pd.merge(df, df_deltat, on=col_date, how='left')
 
   df[col_deltaratio] = df[col_refval] / df[col_a]
-    
-  all_deltat[col_b] = deltat
+
+  all_deltat[col_b] = deltat.days
 
   return df
 
@@ -208,8 +213,8 @@ def calc_efficiency(df):
    with open(fileOut, mode='w', encoding='utf-8', newline='\n') as fh:
       fh.write(
          f"deltaT: Infektion-Intensiv:{all_deltat[col_intensiv]}d, "
-         "Infektion-Beatmung: {all_deltat[col_beatmet]}d, "
-         "Infektion-Tod: {all_deltat[col_tod]}d"
+         f"Infektion-Beatmung: {all_deltat[col_beatmet]}d, "
+         f"Infektion-Tod: {all_deltat[col_tod]}d"
       )
      
    return df
