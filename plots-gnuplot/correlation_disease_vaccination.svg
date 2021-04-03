@@ -330,7 +330,7 @@
 		L702.1,458.3 L703.7,458.3 L705.4,458.3 L707.0,458.3 L708.7,458.2 L710.4,458.1 L712.0,458.1 L713.7,458.1
 		L715.3,458.0 L717.0,457.9 L718.6,457.9 L720.3,457.7 L722.0,457.5 L723.6,457.4 L725.3,457.3 L726.9,457.2
 		L728.6,457.1 L730.2,457.0 L731.9,456.8 L733.6,456.6 L735.2,456.5 L736.9,456.4 L738.5,456.3 L740.2,456.0
-		 '/></g>
+		L741.8,455.9  '/></g>
 	</g>
 	<g id="gnuplot_plot_5" ><title>Beatmete CoV-Patienten</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -382,7 +382,7 @@
 		L702.1,460.7 L703.7,460.8 L705.4,460.8 L707.0,460.8 L708.7,460.8 L710.4,460.6 L712.0,460.7 L713.7,460.7
 		L715.3,460.7 L717.0,460.7 L718.6,460.7 L720.3,460.6 L722.0,460.5 L723.6,460.5 L725.3,460.4 L726.9,460.3
 		L728.6,460.2 L730.2,460.2 L731.9,460.1 L733.6,459.9 L735.2,459.9 L736.9,459.8 L738.5,459.7 L740.2,459.5
-		 '/></g>
+		L741.8,459.5  '/></g>
 	</g>
 	<g id="gnuplot_plot_6" ><title>Todesfälle mit CoV pro Woche</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
