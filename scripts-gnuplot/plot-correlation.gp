@@ -88,7 +88,6 @@ plot \
 
 unset output
 
-
 set terminal png size 800,500
 set output '../plots-gnuplot/correlation_disease_vaccination_normalized.png'
 plot \
@@ -102,5 +101,23 @@ plot \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Verhältnis beatmete Patienten/Infektionen (mit deltaT)")) title "Verhältnis beatmete Patienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "red", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Verhältnis Todesfälle/Infektionen (mit deltaT)")) title "Verhältnis Todesfälle/Infektionen (mit deltaT)" with lines lw 2 lt rgb "black", \
 
+unset output
 
+
+set label 1 label1_text_right."Quellen: https://github.com/entorb, https://github.com/ard-data, https://www.divi.de"
+title = "Korrelation Covid Infektionen und Kranheitsverlauf (Stand: ".date_last.")"
+set title title
+set ylabel ""
+#plot \
+#  '../data/df_all.csv' using (column("Datum")):(column("CoV-Infektionen pro Woche")) title "CoV-Infektionen pro Woche" with lines lw 2, \
+#  '../data/df_all.csv' using (column("Datum")):(column("Intensiv-CoV-Patienten")) title "Intensiv-CoV-Patienten" with lines lw 2, \
+#  '../data/df_all.csv' using (column("Datum")):(column("Beatmete CoV-Patienten")) title "Beatmete CoV-Patienten" with lines lw 2, \
+#  '../data/df_all.csv' using (column("Datum")):(column("Todesfälle mit CoV pro Woche")) title "Todesfälle mit CoV pro Woche" with lines lw 2, \
+set yrange [0:0.4]
+set terminal svg size 800,500
+set output '../plots-gnuplot/correlation_disease_pct.svg'
+plot \
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Intensivpatienten/Infektionen (mit deltaT)")) title "Verhältnis Intensivpatienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "goldenrod", \
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis beatmete Patienten/Infektionen (mit deltaT)")) title "Verhältnis beatmete Patienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "red", \
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Todesfälle/Infektionen (mit deltaT)") title "Verhältnis Todesfälle/Infektionen (mit deltaT)" with lines lw 2 lt rgb "black", \
 unset output
