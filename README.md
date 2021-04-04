@@ -1,7 +1,15 @@
 # Überprüfung der Wirksamkeit der CoVid Impfkampagne in Deutschland auf Basis zugänglicher Daten
-## Qualitative Darstellung (regelmäßig aktualisiert)
+
+## Qualitative Darstellung
 
 ![correlation_disease_vaccination_normalized.svg](plots-gnuplot/correlation_disease_vaccination_normalized.svg)
+
+## Quantitative Darstellung
+
+![correlation_disease_course.svg](plots-gnuplot/correlation_disease_course.svg)
+
+Die Daten werden regelmäßig aktualisiert.
+
 
 Datenquellen:
 - https://github.com/entorb/COVID-19-Coronavirus-German-Regions/

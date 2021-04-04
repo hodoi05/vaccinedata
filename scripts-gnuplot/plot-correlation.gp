@@ -30,6 +30,7 @@ set label 1 label1_text_right."Quellen: https://github.com/entorb, https://githu
 title = "Verlauf Covid Infektionen und Impfkampagne (Stand: ".date_last.")"
 set title title
 set ylabel ""
+set rmargin screen 0.96
 
 
 #plot \
@@ -47,8 +48,8 @@ plot \
   '../data/df_all.csv' using (column("Datum")):(column("Intensiv-CoV-Patienten")) title "Intensiv-CoV-Patienten" with lines lw 2 lt rgb "goldenrod", \
   '../data/df_all.csv' using (column("Datum")):(column("Beatmete CoV-Patienten")) title "Beatmete CoV-Patienten" with lines lw 2 lt rgb "red", \
   '../data/df_all.csv' using (column("Datum")):(column("Todesfälle mit CoV pro Woche")) title "Todesfälle mit CoV pro Woche" with lines lw 2 lt rgb "black", \
-  '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" with lines lw 1 lt rgb "dark-cyan", \
-  '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" with lines lw 1 lt rgb "web-blue", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" with lines lw 1 lt rgb "dark-cyan", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" with lines lw 1 lt rgb "web-blue", \
 
 unset output
 
@@ -72,6 +73,7 @@ set label 1 label1_text_right.delta_t."\r\nQuellen: https://github.com/entorb, h
 
 set yrange [0:1.4]
 set terminal svg size 800,500
+
 set output '../plots-gnuplot/correlation_disease_vaccination_normalized.svg'
 
 # '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Cases")) title "CoV Fälle" with lines lw 2, \  
@@ -104,20 +106,48 @@ plot \
 unset output
 
 
-set label 1 label1_text_right."Quellen: https://github.com/entorb, https://github.com/ard-data, https://www.divi.de"
-title = "Korrelation Covid Infektionen und Kranheitsverlauf (Stand: ".date_last.")"
-set title title
-set ylabel ""
-#plot \
-#  '../data/df_all.csv' using (column("Datum")):(column("CoV-Infektionen pro Woche")) title "CoV-Infektionen pro Woche" with lines lw 2, \
-#  '../data/df_all.csv' using (column("Datum")):(column("Intensiv-CoV-Patienten")) title "Intensiv-CoV-Patienten" with lines lw 2, \
-#  '../data/df_all.csv' using (column("Datum")):(column("Beatmete CoV-Patienten")) title "Beatmete CoV-Patienten" with lines lw 2, \
-#  '../data/df_all.csv' using (column("Datum")):(column("Todesfälle mit CoV pro Woche")) title "Todesfälle mit CoV pro Woche" with lines lw 2, \
-set yrange [0:0.4]
+set output '../plots-gnuplot/correlation_disease_course.svg'
 set terminal svg size 800,500
-set output '../plots-gnuplot/correlation_disease_pct.svg'
+
+set multiplot
+
+set tmargin screen 0.85
+set lmargin screen 0.2
+set rmargin screen 0.95
+
+set xrange ["2020-03-23":]
+
+set label 1 label1_text_right.delta_t."\r\nQuellen: https://github.com/entorb, https://github.com/ard-data, https://www.divi.de"
+title = "Korrelation gemeldete Covid Infektionen und Krankheitsverlauf (Stand: ".date_last.")"
+set title title
+
+
+set style line 50 lt 1 lc rgb "blue" lw 2
+set border ls 50
+
+set ytics 10000000 offset -8,0
+set yrange [0:80000000]
+
+set ylabel "Geimpfte Personen" offset -6,0 textcolor rgb "blue"
+
 plot \
-  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Intensivpatienten/Infektionen (mit deltaT)")) title "Verhältnis Intensivpatienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "goldenrod", \
-  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis beatmete Patienten/Infektionen (mit deltaT)")) title "Verhältnis beatmete Patienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "red", \
-  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Todesfälle/Infektionen (mit deltaT)") title "Verhältnis Todesfälle/Infektionen (mit deltaT)" with lines lw 2 lt rgb "black", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" at 0.85,0.71 with lines lw 1 lt rgb "dark-cyan", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.85,0.68 with lines lw 1 lt rgb "web-blue", \
+
+
+set style line 50 lt 1 lc rgb "black" lw 2
+set border ls 50
+
+set ytics 0.05  offset 0,0
+set yrange [0:0.25]
+set ylabel "Verhältnis zu Infektionszahlen" offset 2,0 textcolor rgb "black"
+
+plot \
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Intensivpatienten/Infektionen (mit deltaT)")) title "Verhältnis Intensivpatienten/Infektionen (mit deltaT)"  at 0.85,0.80 with lines lw 2 lt rgb "goldenrod", \
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis beatmete Patienten/Infektionen (mit deltaT)")) title "Verhältnis beatmete Patienten/Infektionen (mit deltaT)"  at 0.85,0.77 with lines lw 2 lt rgb "red", \
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Todesfälle/Infektionen (mit deltaT)")) title "Verhältnis Todesfälle/Infektionen (mit deltaT)"  at 0.85,0.74 with lines lw 2 lt rgb "black"
+
+
+unset multiplot
+
 unset output
