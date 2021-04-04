@@ -42,7 +42,13 @@ set ylabel ""
 set yrange [0:200000]
 set terminal svg size 800,500
 set output '../plots-gnuplot/correlation_disease_vaccination.svg'
-plot for [col=1:8] '../data/df_all.csv' using 0:col with lines lw 2 title columnheader
+plot \
+  '../data/df_all.csv' using (column("Datum")):(column("CoV-Infektionen pro Woche")) title "CoV-Infektionen pro Woche" with lines lw 2 lt rgb "web-green", \
+  '../data/df_all.csv' using (column("Datum")):(column("Intensiv-CoV-Patienten")) title "Intensiv-CoV-Patienten" with lines lw 2 lt rgb "goldenrod", \
+  '../data/df_all.csv' using (column("Datum")):(column("Beatmete CoV-Patienten")) title "Beatmete CoV-Patienten" with lines lw 2 lt rgb "red", \
+  '../data/df_all.csv' using (column("Datum")):(column("Todesfälle mit CoV pro Woche")) title "Todesfälle mit CoV pro Woche" with lines lw 2 lt rgb "black", \
+  '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" with lines lw 1 lt rgb "dark-cyan", \
+  '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" with lines lw 1 lt rgb "web-blue", \
 
 unset output
 
