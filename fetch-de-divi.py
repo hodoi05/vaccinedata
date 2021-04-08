@@ -21,6 +21,7 @@ import pandas as pd
 import numpy as np
 import datetime
 
+
 # my helper modules
 import helper
 
@@ -218,7 +219,60 @@ def calc_efficiency(df):
       )
      
    return df
+
+def retrieve_ageincidents():
+
+    location = "data/source/Altersverteilung.xlsx"
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ',
+    }
+    cont = requests.get("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Altersverteilung.xlsx?__blob=publicationFile", headers=headers).content
+    
+    with open(location, mode='wb') as fh:
+        fh.write(cont)
+    
+    
+    df_age_original = pd.read_excel(location)
+    df_age = df_age_original.transpose()
+    df_age = df_age.set_axis(
+        [
+        "Gesamt",
+        "90+",
+        "85 - 89",
+        "80 - 84",
+        "75 - 79",
+        "70 - 74",
+        "65 - 69",
+        "60 - 64",
+        "55 - 59",
+        "50 - 54",
+        "45 - 49",
+        "40 - 44",
+        "35 - 39",
+        "30 - 34",
+        "25 - 29",
+        "20 - 24",
+        "15 - 19",
+        "10 - 14",
+        "5 - 9",
+        "0 - 4"
+        ], axis="columns")
+    df_age.reset_index(inplace=True)   
+    df_age = df_age.drop(labels=0, axis=0)
+    df_age = df_age.rename(columns = {'index':'Date'})
+    for i in range (0,len(df_age)):
+        j = int((df_age.iat[i,0])[:4])
+        s = datetime.datetime(j,1,1) 
+        minus = s.weekday()
+        cw = int((df_age.iat[i,0])[5:7])
+        df_age.iat[i,0] = s + datetime.timedelta(cw*7-minus)
+    df_age_pyramid = pd.read_excel('data/source/Age_structure_germany.xlsx')
+    return df_age
+
  
+df_age = retrieve_ageincidents()
+
+
 fetch_latest_csvs()
 d_database = generate_database()
 export_csv(d_database)
