@@ -167,7 +167,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(419.9,31.0)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Normalisierter Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-04-07)</tspan></text>
+		<text><tspan font-family="Arial" >Normalisierter Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-04-08)</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -231,7 +231,8 @@
 		L688.6,370.0 L690.0,369.5 L691.4,369.2 L692.9,365.3 L694.3,361.6 L695.7,356.6 L697.2,352.3 L698.6,349.7
 		L700.0,347.7 L701.4,340.8 L702.9,335.7 L704.3,328.1 L705.7,322.7 L707.2,317.9 L708.6,316.2 L710.0,312.9
 		L711.4,309.1 L712.9,300.7 L714.3,294.1 L715.7,286.9 L717.2,281.4 L718.6,277.9 L720.0,274.5 L721.5,300.1
-		L722.9,269.8 L724.3,269.3 L725.7,273.1 L727.2,281.2 L728.6,283.4 L730.0,287.7 L731.5,272.1  '/></g>
+		L722.9,269.8 L724.3,269.3 L725.7,273.1 L727.2,281.2 L728.6,283.4 L730.0,287.7 L731.5,272.1 L732.9,306.0
+		 '/></g>
 	</g>
 	<g id="gnuplot_plot_2" ><title>Intensiv-CoV-Patienten</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -394,7 +395,8 @@
 		L688.6,378.6 L690.0,383.5 L691.4,389.0 L692.9,390.7 L694.3,391.3 L695.7,394.1 L697.2,395.4 L698.6,394.7
 		L700.0,395.5 L701.4,397.9 L702.9,402.3 L704.3,403.5 L705.7,405.0 L707.2,403.7 L708.6,403.5 L710.0,403.0
 		L711.4,403.0 L712.9,403.0 L714.3,405.0 L715.7,407.3 L717.2,407.7 L718.6,408.0 L720.0,411.3 L721.5,422.9
-		L722.9,412.5 L724.3,410.2 L725.7,412.0 L727.2,413.0 L728.6,412.7 L730.0,416.9 L731.5,403.0  '/></g>
+		L722.9,412.5 L724.3,410.2 L725.7,412.0 L727.2,413.0 L728.6,412.7 L730.0,416.9 L731.5,403.0 L732.9,409.7
+		 '/></g>
 	</g>
 	<g id="gnuplot_plot_5" ><title>Personen mit Erstimpfung</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -589,7 +591,7 @@
 		L664.3,270.7 L665.7,282.1 L667.1,291.4 L668.6,289.5 L670.0,291.8 L671.4,299.8 L672.9,316.9 L674.3,322.7
 		L675.7,328.2 L677.1,325.3 L678.6,325.9 L680.0,324.7 L681.4,327.5 L682.9,327.5 L684.3,334.0 L685.7,339.3
 		L687.2,340.8 L688.6,342.3 L690.0,351.0 L691.4,379.4 L692.9,359.2 L694.3,358.3 L695.7,367.7 L697.2,374.2
-		L698.6,375.9 L700.0,386.0 L701.4,365.2  '/></g>
+		L698.6,375.9 L700.0,386.0 L701.4,365.2 L702.9,381.8  '/></g>
 	</g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
