@@ -5,3 +5,4 @@ tqdm
 pandas
 openpyxl
 matplotlib
+xlrd >= 1.0.0

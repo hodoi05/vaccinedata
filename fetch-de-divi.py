@@ -222,17 +222,10 @@ def calc_efficiency(df):
 
 def retrieve_ageincidents():
 
-    location = "data/source/Altersverteilung.xlsx"
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ',
-    }
-    cont = requests.get("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Altersverteilung.xlsx?__blob=publicationFile", headers=headers).content
-    
-    with open(location, mode='wb') as fh:
-        fh.write(cont)
-    
-    
-    df_age_original = pd.read_excel(location)
+    helper.download_as_browser("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Altersverteilung.xls?__blob=publicationFile", "data/source/Altersverteilung.xls")
+    helper.download_as_browser("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Projekte_RKI/COVID-19_Todesfaelle.xlsx?__blob=publicationFile", "data/source/COVID-19_Todesfaelle.xlsx")
+    helper.download_as_browser("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile", "data/source/Impfquotenmonitoring.xlsx")
+    df_age_original = pd.read_excel("data/source/Altersverteilung.xls", sheet_name="Fälle", engine='xlrd')
     df_age = df_age_original.transpose()
     df_age = df_age.set_axis(
         [
@@ -260,17 +253,14 @@ def retrieve_ageincidents():
     df_age.reset_index(inplace=True)   
     df_age = df_age.drop(labels=0, axis=0)
     df_age = df_age.rename(columns = {'index':'Date'})
-    for i in range (0,len(df_age)):
-        j = int((df_age.iat[i,0])[:4])
-        s = datetime.datetime(j,1,1) 
-        minus = s.weekday()
-        cw = int((df_age.iat[i,0])[5:7])
-        df_age.iat[i,0] = s + datetime.timedelta(cw*7-minus)
-    df_age_pyramid = pd.read_excel('data/source/Age_structure_germany.xlsx')
+    df_age["Datum"] = pd.to_datetime(df_age["Date"] + "-1", format="%Y_%W-%w")
+    df_age.pop("Date")
+    df_age_pyramid = pd.read_excel('data/source/Age_structure_germany.xlsx', engine='openpyxl')
     return df_age
 
  
 df_age = retrieve_ageincidents()
+df_age.to_csv('data/df_age.csv', index=False)
 
 
 fetch_latest_csvs()
