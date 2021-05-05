@@ -69,7 +69,7 @@ unset output
 title = "Normalisierter Verlauf Covid Infektionen und Impfkampagne (Stand: ".date_last.")"
 set title title
 set ylabel "min/max normalisiert"
-set label 1 label1_text_right.delta_t."\r\nQuellen: https://www.rki.de"
+set label 1 label1_text_right.delta_t."\r\nQuellen: https://github.com/entorb, https://github.com/ard-data, https://www.divi.de"
 
 set yrange [0:1.4]
 set terminal svg size 800,500
