@@ -165,7 +165,7 @@
 		<text><tspan font-family="Verdana" >deltaT: Infektion-Intensiv:10d, Infektion-Beatmung: 11d, Infektion-Tod: 21d</tspan></text>
 	</g>
 	<g transform="translate(786.8,250.0) rotate(-90)" stroke="none" fill="black" font-family="Verdana" font-size="6.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" >Quellen: https://www.rki.de</tspan></text>
+		<text><tspan font-family="Verdana" >Quellen: https://github.com/entorb, https://github.com/ard-data, https://www.divi.de</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
