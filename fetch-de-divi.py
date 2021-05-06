@@ -253,12 +253,12 @@ def retrieve_ageincidents():
     df_age.reset_index(inplace=True)   
     df_age = df_age.drop(labels=0, axis=0)
     df_age = df_age.rename(columns = {'index':'Date'})
-    df_age["Datum"] = pd.to_datetime(df_age["Date"] + "-1", format="%Y_%W-%w")
+    df_age["Datum"] = pd.to_datetime(df_age["Date"] + "-1", format="%G_%V-%u")
     df_age.pop("Date")
     df_age_pyramid = pd.read_excel('data/source/Age_structure_germany.xlsx', engine='openpyxl')
     return df_age
 
- 
+
 df_age = retrieve_ageincidents()
 df_age.to_csv('data/df_age.csv', index=False)
 

@@ -173,25 +173,25 @@ set output '../plots-gnuplot/age_cases.svg'
 set multiplot
 
 plot \
-  '../data/df_age.csv' using (column("Datum")):(column("90+")) title "Alter 90 +" with lines lw 1 lc rgb '#FFFF00', \
-  '../data/df_age.csv' using (column("Datum")):(column("85 - 89")) title "Alter 85 - 89" with lines lw 1 lc rgb '#F0FF00', \
-  '../data/df_age.csv' using (column("Datum")):(column("80 - 84")) title "Alter 80 - 84" with lines lw 1 lc rgb '#E0FF00', \
-  '../data/df_age.csv' using (column("Datum")):(column("75 - 79")) title "Alter 75 - 79" with lines lw 1 lc rgb '#D0F000', \
-  '../data/df_age.csv' using (column("Datum")):(column("70 - 74")) title "Alter 70 - 74" with lines lw 1 lc rgb '#C0E000', \
-  '../data/df_age.csv' using (column("Datum")):(column("65 - 69")) title "Alter 65 - 69" with lines lw 1 lc rgb '#B0D000', \
-  '../data/df_age.csv' using (column("Datum")):(column("60 - 64")) title "Alter 60 - 64" with lines lw 1 lc rgb '#A0C000', \
-  '../data/df_age.csv' using (column("Datum")):(column("55 - 59")) title "Alter 55 - 59" with lines lw 1 lc rgb '#90B000', \
-  '../data/df_age.csv' using (column("Datum")):(column("50 - 54")) title "Alter 50 - 54" with lines lw 1 lc rgb '#80A000', \
-  '../data/df_age.csv' using (column("Datum")):(column("45 - 49")) title "Alter 45 - 49" with lines lw 1 lc rgb '#709000', \
+  '../data/df_age.csv' using (column("Datum")):(column("90+")) title "Alter 90 +" with lines lw 1 lc rgb '#FF0000', \
+  '../data/df_age.csv' using (column("Datum")):(column("85 - 89")) title "Alter 85 - 89" with lines lw 1 lc rgb '#F00000', \
+  '../data/df_age.csv' using (column("Datum")):(column("80 - 84")) title "Alter 80 - 84" with lines lw 1 lc rgb '#E00000', \
+  '../data/df_age.csv' using (column("Datum")):(column("75 - 79")) title "Alter 75 - 79" with lines lw 1 lc rgb '#D01000', \
+  '../data/df_age.csv' using (column("Datum")):(column("70 - 74")) title "Alter 70 - 74" with lines lw 1 lc rgb '#C02000', \
+  '../data/df_age.csv' using (column("Datum")):(column("65 - 69")) title "Alter 65 - 69" with lines lw 1 lc rgb '#B03000', \
+  '../data/df_age.csv' using (column("Datum")):(column("60 - 64")) title "Alter 60 - 64" with lines lw 1 lc rgb '#A04000', \
+  '../data/df_age.csv' using (column("Datum")):(column("55 - 59")) title "Alter 55 - 59" with lines lw 1 lc rgb '#905000', \
+  '../data/df_age.csv' using (column("Datum")):(column("50 - 54")) title "Alter 50 - 54" with lines lw 1 lc rgb '#806000', \
+  '../data/df_age.csv' using (column("Datum")):(column("45 - 49")) title "Alter 45 - 49" with lines lw 1 lc rgb '#707000', \
   '../data/df_age.csv' using (column("Datum")):(column("40 - 44")) title "Alter 40 - 44" with lines lw 1 lc rgb '#608000', \
-  '../data/df_age.csv' using (column("Datum")):(column("35 - 39")) title "Alter 35 - 39" with lines lw 1 lc rgb '#507000', \
-  '../data/df_age.csv' using (column("Datum")):(column("30 - 34")) title "Alter 30 - 34" with lines lw 1 lc rgb '#406000', \
-  '../data/df_age.csv' using (column("Datum")):(column("25 - 29")) title "Alter 25 - 29" with lines lw 1 lc rgb '#305000', \
-  '../data/df_age.csv' using (column("Datum")):(column("20 - 24")) title "Alter 20 - 24" with lines lw 1 lc rgb '#204000', \
-  '../data/df_age.csv' using (column("Datum")):(column("15 - 19")) title "Alter 15 - 19" with lines lw 1 lc rgb '#103000', \
-  '../data/df_age.csv' using (column("Datum")):(column("10 - 14")) title "Alter 10 - 14" with lines lw 1 lc rgb '#082000', \
-  '../data/df_age.csv' using (column("Datum")):(column("5 - 9")) title "Alter 5 - 9" with lines lw 1 lc rgb '#041000', \
-  '../data/df_age.csv' using (column("Datum")):(column("0 - 4")) title "Alter 0 - 4" with lines lw 1 lc rgb '#000000'
+  '../data/df_age.csv' using (column("Datum")):(column("35 - 39")) title "Alter 35 - 39" with lines lw 1 lc rgb '#509000', \
+  '../data/df_age.csv' using (column("Datum")):(column("30 - 34")) title "Alter 30 - 34" with lines lw 1 lc rgb '#40A000', \
+  '../data/df_age.csv' using (column("Datum")):(column("25 - 29")) title "Alter 25 - 29" with lines lw 1 lc rgb '#30B000', \
+  '../data/df_age.csv' using (column("Datum")):(column("20 - 24")) title "Alter 20 - 24" with lines lw 1 lc rgb '#20C000', \
+  '../data/df_age.csv' using (column("Datum")):(column("15 - 19")) title "Alter 15 - 19" with lines lw 1 lc rgb '#10D000', \
+  '../data/df_age.csv' using (column("Datum")):(column("10 - 14")) title "Alter 10 - 14" with lines lw 1 lc rgb '#08E000', \
+  '../data/df_age.csv' using (column("Datum")):(column("5 - 9")) title "Alter 5 - 9" with lines lw 1 lc rgb '#04F000', \
+  '../data/df_age.csv' using (column("Datum")):(column("0 - 4")) title "Alter 0 - 4" with lines lw 1 lc rgb '#00FF00'
 
 set yrange [0:85000000]
 set ytics 10000000  offset 72,0
