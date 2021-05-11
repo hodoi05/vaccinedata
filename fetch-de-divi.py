@@ -21,6 +21,7 @@ import pandas as pd
 import numpy as np
 import datetime
 
+
 # my helper modules
 import helper
 
@@ -218,7 +219,50 @@ def calc_efficiency(df):
       )
      
    return df
- 
+
+def retrieve_ageincidents():
+
+    helper.download_as_browser("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Altersverteilung.xls?__blob=publicationFile", "data/source/Altersverteilung.xls")
+    helper.download_as_browser("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Projekte_RKI/COVID-19_Todesfaelle.xlsx?__blob=publicationFile", "data/source/COVID-19_Todesfaelle.xlsx")
+    helper.download_as_browser("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Impfquotenmonitoring.xlsx?__blob=publicationFile", "data/source/Impfquotenmonitoring.xlsx")
+    df_age_original = pd.read_excel("data/source/Altersverteilung.xls", sheet_name="Fälle", engine='xlrd')
+    df_age = df_age_original.transpose()
+    df_age = df_age.set_axis(
+        [
+        "Gesamt",
+        "90+",
+        "85 - 89",
+        "80 - 84",
+        "75 - 79",
+        "70 - 74",
+        "65 - 69",
+        "60 - 64",
+        "55 - 59",
+        "50 - 54",
+        "45 - 49",
+        "40 - 44",
+        "35 - 39",
+        "30 - 34",
+        "25 - 29",
+        "20 - 24",
+        "15 - 19",
+        "10 - 14",
+        "5 - 9",
+        "0 - 4"
+        ], axis="columns")
+    df_age.reset_index(inplace=True)   
+    df_age = df_age.drop(labels=0, axis=0)
+    df_age = df_age.rename(columns = {'index':'Date'})
+    df_age["Datum"] = pd.to_datetime(df_age["Date"] + "-1", format="%G_%V-%u")
+    df_age.pop("Date")
+    df_age_pyramid = pd.read_excel('data/source/Age_structure_germany.xlsx', engine='openpyxl')
+    return df_age
+
+
+df_age = retrieve_ageincidents()
+df_age.to_csv('data/df_age.csv', index=False)
+
+
 fetch_latest_csvs()
 d_database = generate_database()
 export_csv(d_database)

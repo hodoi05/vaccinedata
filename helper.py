@@ -645,3 +645,12 @@ def read_ref_data_de_states() -> dict:
             d['Pop Density'] = float(row['Pop Density'])
             d_states_ref[row["Code"]] = d
     return d_states_ref
+
+def download_as_browser(url, target_location):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 Firefox/75.0 ',
+    }
+    cont = requests.get(url, headers=headers).content
+    with open(target_location, mode='wb') as fh:
+        fh.write(cont)
+    

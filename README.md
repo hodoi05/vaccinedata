@@ -8,6 +8,10 @@
 
 ![correlation_disease_course.svg](plots-gnuplot/correlation_disease_course.svg)
 
+## Auswirkung der Impfungen in Altersgruppen
+
+![age_cases.svg](plots-gnuplot/age_cases.svg)
+
 Die Daten werden regelmäßig aktualisiert.
 
 
