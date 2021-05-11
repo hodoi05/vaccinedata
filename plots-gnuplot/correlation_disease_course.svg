@@ -147,8 +147,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='rgb(  0,   0, 255)'  d='M160.0,75.1 L160.0,464.0 L759.9,464.0 L759.9,75.1 L160.0,75.1 Z  '/>	<g transform="translate(777.8,250.0) rotate(-90)" stroke="none" fill="black" font-family="Verdana" font-size="6.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" >deltaT: Infektion-Intensiv:10d, Infektion-Beatmung: 11d, Infektion-Tod: 21d
-</tspan></text>
+		<text><tspan font-family="Verdana" >deltaT: Infektion-Intensiv:10d, Infektion-Beatmung: 11d, Infektion-Tod: 21d</tspan></text>
 	</g>
 	<g transform="translate(786.8,250.0) rotate(-90)" stroke="none" fill="black" font-family="Verdana" font-size="6.00"  text-anchor="middle">
 		<text><tspan font-family="Verdana" >Quellen: https://github.com/entorb, https://github.com/ard-data, https://www.divi.de</tspan></text>
@@ -313,8 +312,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='rgb(  0,   0,   0)'  d='M160.0,75.1 L160.0,464.0 L759.9,464.0 L759.9,75.1 L160.0,75.1 Z  '/>	<g transform="translate(777.8,250.0) rotate(-90)" stroke="none" fill="black" font-family="Verdana" font-size="6.00"  text-anchor="middle">
-		<text><tspan font-family="Verdana" >deltaT: Infektion-Intensiv:10d, Infektion-Beatmung: 11d, Infektion-Tod: 21d
-</tspan></text>
+		<text><tspan font-family="Verdana" >deltaT: Infektion-Intensiv:10d, Infektion-Beatmung: 11d, Infektion-Tod: 21d</tspan></text>
 	</g>
 	<g transform="translate(786.8,250.0) rotate(-90)" stroke="none" fill="black" font-family="Verdana" font-size="6.00"  text-anchor="middle">
 		<text><tspan font-family="Verdana" >Quellen: https://github.com/entorb, https://github.com/ard-data, https://www.divi.de</tspan></text>
@@ -388,9 +386,10 @@
 		L660.4,386.5 L661.9,386.4 L663.3,386.6 L664.8,388.8 L666.3,387.4 L667.7,386.6 L669.2,385.8 L670.6,386.0
 		L672.1,385.5 L673.6,384.4 L675.0,384.5 L676.5,385.1 L678.0,385.8 L679.4,388.8 L680.9,390.8 L682.4,391.4
 		L683.8,390.9 L685.3,393.9 L686.7,395.3 L688.2,396.9 L689.7,399.0 L691.1,399.8 L692.6,399.7 L694.1,399.1
-		L695.5,399.6 L714.5,395.6 L716.0,390.0 L717.5,386.1 L718.9,387.5 L720.4,391.3 L721.9,394.6 L723.3,396.6
-		L724.8,398.8 L726.2,405.1 L727.7,408.4 L729.2,407.8 L730.6,408.4 L732.1,409.0 L733.6,408.5 L735.0,408.1
-		L736.5,409.5 L738.0,409.3 L739.4,410.2 L740.9,410.5 L742.3,411.7 L743.8,412.6 L745.3,414.1  '/></g>
+		L695.5,399.6 L697.0,400.8 L698.4,401.9 L699.9,401.5 L701.4,402.2 L702.8,402.8 L714.5,395.6 L716.0,390.0
+		L717.5,386.1 L718.9,387.5 L720.4,391.3 L721.9,394.6 L723.3,396.6 L724.8,398.8 L726.2,405.1 L727.7,408.4
+		L729.2,407.8 L730.6,408.4 L732.1,409.0 L733.6,408.5 L735.0,408.1 L736.5,409.5 L738.0,409.3 L739.4,410.2
+		L740.9,410.5 L742.3,411.7 L743.8,412.6 L745.3,414.1  '/></g>
 	</g>
 	<g id="gnuplot_plot_2b" ><title>Verhältnis beatmete Patienten/Infektionen (mit deltaT)</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -442,9 +441,10 @@
 		L658.9,419.2 L660.4,419.8 L661.9,420.1 L663.3,420.7 L664.8,421.1 L666.3,419.5 L667.7,420.1 L669.2,420.9
 		L670.6,420.7 L672.1,420.7 L673.6,420.9 L675.0,419.6 L676.5,420.8 L678.0,421.6 L679.4,422.9 L680.9,423.8
 		L682.4,423.4 L683.8,423.9 L685.3,425.3 L686.7,425.0 L688.2,426.9 L689.7,427.5 L691.1,427.8 L692.6,426.9
-		L694.1,427.4 L713.1,425.9 L714.5,425.2 L716.0,421.9 L717.5,419.8 L718.9,421.3 L720.4,423.3 L721.9,424.5
-		L723.3,425.9 L724.8,426.8 L726.2,430.2 L727.7,432.0 L729.2,432.4 L730.6,432.3 L732.1,432.2 L733.6,431.8
-		L735.0,431.4 L736.5,431.9 L738.0,432.1 L739.4,432.5 L740.9,433.0 L742.3,433.4 L743.8,433.7  '/></g>
+		L694.1,427.4 L695.5,427.5 L697.0,428.0 L698.4,428.1 L699.9,428.4 L701.4,428.7 L713.1,425.9 L714.5,425.2
+		L716.0,421.9 L717.5,419.8 L718.9,421.3 L720.4,423.3 L721.9,424.5 L723.3,425.9 L724.8,426.8 L726.2,430.2
+		L727.7,432.0 L729.2,432.4 L730.6,432.3 L732.1,432.2 L733.6,431.8 L735.0,431.4 L736.5,431.9 L738.0,432.1
+		L739.4,432.5 L740.9,433.0 L742.3,433.4 L743.8,433.7  '/></g>
 	</g>
 	<g id="gnuplot_plot_3b" ><title>Verhältnis Todesfälle/Infektionen (mit deltaT)</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
