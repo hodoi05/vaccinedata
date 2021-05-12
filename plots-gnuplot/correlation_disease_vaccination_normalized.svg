@@ -175,7 +175,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(419.9,31.0)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Normalisierter Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-05-07)</tspan></text>
+		<text><tspan font-family="Arial" >Normalisierter Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-05-12)</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -243,7 +243,7 @@
 		L660.7,300.2 L662.0,290.5 L663.3,281.4 L664.5,273.7 L665.8,267.3 L667.1,247.9 L668.3,233.3 L669.6,232.7
 		L670.9,233.2 L672.1,231.0 L673.4,233.9 L674.7,235.9 L676.0,230.7 L677.2,230.6 L678.5,227.8 L679.8,228.5
 		L681.0,229.1 L682.3,228.4 L683.6,226.2 L684.9,230.5 L686.1,238.2 L687.4,243.4 L688.7,250.6 L689.9,254.6
-		L691.2,259.1 L692.5,264.6 L693.7,271.4 L695.0,275.9 L696.3,285.4  '/></g>
+		L691.2,259.1 L692.5,264.6 L693.7,271.4 L695.0,275.9 L696.3,285.4 L702.6,224.9  '/></g>
 	</g>
 	<g id="gnuplot_plot_2" ><title>Intensiv-CoV-Patienten</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -416,7 +416,7 @@
 		L660.7,406.7 L662.0,400.8 L663.3,399.1 L664.5,396.8 L665.8,387.3 L667.1,385.3 L668.3,385.9 L669.6,388.2
 		L670.9,389.4 L672.1,391.2 L673.4,391.5 L674.7,391.3 L676.0,391.9 L677.2,393.4 L678.5,392.6 L679.8,389.5
 		L681.0,387.0 L682.3,388.5 L683.6,386.3 L684.9,387.2 L686.1,387.0 L687.4,385.0 L688.7,387.6 L689.9,388.0
-		L691.2,386.9 L692.5,388.3 L693.7,389.5 L695.0,390.2 L696.3,391.2  '/></g>
+		L691.2,386.9 L692.5,388.3 L693.7,389.5 L695.0,390.2 L696.3,391.2 L702.6,356.8  '/></g>
 	</g>
 	<g id="gnuplot_plot_5" ><title>Personen mit Erstimpfung</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -629,7 +629,7 @@
 		L639.1,362.4 L640.4,362.3 L641.7,369.1 L642.9,376.5 L644.2,382.3 L645.5,387.5 L646.7,389.6 L648.0,391.0
 		L649.3,392.5 L650.6,395.6 L651.8,394.8 L653.1,389.4 L654.4,382.3 L655.6,383.0 L656.9,377.8 L658.2,371.7
 		L659.4,367.0 L660.7,368.3 L662.0,377.8 L663.3,383.5 L664.5,386.0 L665.8,390.6 L667.1,399.9 L668.3,405.6
-		L669.6,406.8  '/></g>
+		L669.6,406.8 L676.0,373.4  '/></g>
 	</g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
