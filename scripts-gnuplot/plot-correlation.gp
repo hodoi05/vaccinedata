@@ -164,7 +164,7 @@ set rmargin screen 0.85
 set yrange [0:17000]
 set ytics 5000  offset 0,0
 set ylabel "Anzahl Fälle"
-set xrange ["2020-03-23":"2021-05-04"]
+set xrange ["2020-03-23":date_last]
 set terminal svg size 800,500
 
 set output '../plots-gnuplot/age_cases.svg'
