@@ -112,8 +112,8 @@ set terminal svg size 800,500
 set multiplot
 
 set tmargin screen 0.85
-set lmargin screen 0.2
-set rmargin screen 0.95
+set lmargin screen 0.15
+set rmargin screen 0.85
 
 set xrange ["2020-03-23":date_last]
 
@@ -125,14 +125,14 @@ set title title
 set style line 50 lt 1 lc rgb "blue" lw 2
 set border ls 50
 
-set ytics 10000000 offset -8,0
+set ytics 10000000 offset 72,0
 set yrange [0:85000000]
 
-set ylabel "Geimpfte Personen" offset -6,0 textcolor rgb "blue"
+set ylabel "Geimpfte Personen" offset 80,0 textcolor rgb "blue"
 
 plot \
-  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" at 0.85,0.71 with lines lw 1 lt rgb "dark-cyan", \
-  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.85,0.68 with lines lw 1 lt rgb "web-blue", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" at 0.75,0.71 with lines lw 1 lt rgb "dark-cyan", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.75,0.68 with lines lw 1 lt rgb "web-blue", \
 
 
 set style line 50 lt 1 lc rgb "black" lw 2
@@ -143,9 +143,9 @@ set yrange [0:0.25]
 set ylabel "Verhältnis zu Infektionszahlen" offset 2,0 textcolor rgb "black"
 
 plot \
-  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Intensivpatienten/Infektionen (mit deltaT)")) title "Verhältnis Intensivpatienten/Infektionen (mit deltaT)"  at 0.85,0.80 with lines lw 2 lt rgb "goldenrod", \
-  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis beatmete Patienten/Infektionen (mit deltaT)")) title "Verhältnis beatmete Patienten/Infektionen (mit deltaT)"  at 0.85,0.77 with lines lw 2 lt rgb "red", \
-  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Todesfälle/Infektionen (mit deltaT)")) title "Verhältnis Todesfälle/Infektionen (mit deltaT)"  at 0.85,0.74 with lines lw 2 lt rgb "black"
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Intensivpatienten/Infektionen (mit deltaT)")) title "Verhältnis Intensivpatienten/Infektionen (mit deltaT)"  at 0.75,0.80 with lines lw 2 lt rgb "goldenrod", \
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis beatmete Patienten/Infektionen (mit deltaT)")) title "Verhältnis beatmete Patienten/Infektionen (mit deltaT)"  at 0.75,0.77 with lines lw 2 lt rgb "red", \
+  '../data/df_all.csv' using (column("Datum")):(column("Verhältnis Todesfälle/Infektionen (mit deltaT)")) title "Verhältnis Todesfälle/Infektionen (mit deltaT)"  at 0.75,0.74 with lines lw 2 lt rgb "black"
 
 
 unset multiplot
@@ -157,20 +157,33 @@ set xdata time
 
 title = "Altersverteilung der Infektionen (Stand: ".date_last.")"
 set title title
-set label 1 label1_text_right.delta_t."\r\nQuellen: https://www.rki.de"
+set label 1 label1_text_right."Quelle: https://www.rki.de"
 set lmargin screen 0.15
 set rmargin screen 0.85
 
-set yrange [0:17000]
-set ytics 5000  offset 0,0
-set ylabel "Anzahl Fälle"
+set style line 50 lt 1 lc rgb "blue" lw 2
+set border ls 50
+set yrange [0:85000000]
+set ytics 10000000  offset 72,0
+set ylabel "Anzahl Impfungen" offset 80,0 textcolor rgb "blue"
 set xrange ["2020-03-23":date_last]
 set terminal svg size 800,500
+
 
 set output '../plots-gnuplot/age_cases.svg'
 #Gesamt,90+,85 - 89,80 - 84,75 - 79,70 - 74,65 - 69,60 - 64,55 - 59,50 - 54,45 - 49,40 - 44,35 - 39,30 - 34,25 - 29,20 - 24,15 - 19,10 - 14,5 - 9,0 - 4,Datum
 
 set multiplot
+
+plot \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" at 0.75,0.83 with lines lw 1 lt rgb "dark-cyan", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.75,0.80 with lines lw 1 lt rgb "web-blue"
+
+set style line 50 lt 1 lc rgb "black" lw 2
+set border ls 50
+set yrange [0:800]
+set ytics 100  offset 0,0
+set ylabel "7-Tages-Inzidenz" offset 2,0 textcolor rgb "black"
 
 plot \
   '../data/df_age.csv' using (column("Datum")):(column("90+")) title "Alter 90 +" with lines lw 1 lc rgb '#FF0000', \
@@ -193,13 +206,6 @@ plot \
   '../data/df_age.csv' using (column("Datum")):(column("5 - 9")) title "Alter 5 - 9" with lines lw 1 lc rgb '#04F000', \
   '../data/df_age.csv' using (column("Datum")):(column("0 - 4")) title "Alter 0 - 4" with lines lw 1 lc rgb '#00FF00'
 
-set yrange [0:85000000]
-set ytics 10000000  offset 72,0
-set ylabel "Anzahl Impfungen" offset 80,0 
-
-plot \
-  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" at 0.75,0.83 with lines lw 1 lt rgb "dark-cyan", \
-  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.75,0.80 with lines lw 1 lt rgb "web-blue"
 
 unset multiplot
 unset output
