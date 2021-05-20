@@ -157,7 +157,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(423.3,31.0)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-05-19)</tspan></text>
+		<text><tspan font-family="Arial" >Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-05-20)</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -229,7 +229,7 @@
 		L681.9,166.5 L683.2,165.5 L684.4,162.7 L685.7,168.2 L686.9,178.0 L688.2,184.6 L689.4,193.7 L690.7,198.8
 		L692.0,204.4 L693.2,211.5 L694.5,220.1 L695.7,225.8 L697.0,237.8 L698.3,244.4 L699.5,251.9 L700.8,256.4
 		L702.0,259.3 L703.3,265.7 L704.5,275.0 L705.8,289.7 L707.1,305.7 L708.3,314.2 L709.6,317.3 L710.8,321.2
-		L712.1,329.1  '/></g>
+		L712.1,329.1 L713.3,339.6  '/></g>
 	</g>
 	<g id="gnuplot_plot_2" ><title>Intensiv-CoV-Patienten</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -408,7 +408,7 @@
 		L681.9,460.6 L683.2,460.7 L684.4,460.6 L685.7,460.6 L686.9,460.6 L688.2,460.5 L689.4,460.6 L690.7,460.7
 		L692.0,460.6 L693.2,460.7 L694.5,460.7 L695.7,460.8 L697.0,460.8 L698.3,460.8 L699.5,460.8 L700.8,460.8
 		L702.0,460.9 L703.3,460.9 L704.5,460.9 L705.8,461.1 L707.1,461.2 L708.3,461.3 L709.6,461.3 L710.8,461.4
-		L712.1,461.4  '/></g>
+		L712.1,461.4 L713.3,461.5  '/></g>
 	</g>
 	<g id="gnuplot_plot_5" ><title>Personen mit Erstimpfung</title>
 <g fill="none" color="white" stroke="rgb(  0,   0,   0)" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
