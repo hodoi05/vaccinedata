@@ -227,6 +227,8 @@ def retrieve_ageincidents():
     try:
     	helper.download_as_browser("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Altersverteilung.xlsx?__blob=publicationFile", "data/source/Altersverteilung.xlsx")
     	df_age_original = pd.read_excel("data/source/Altersverteilung.xlsx", sheet_name="7-Tages-Inzidenz", engine='openpyxl')
+    except KeyError:
+    	df_age_original = pd.read_excel("data/source/Altersverteilung.xlsx", sheet_name="7-Tage-Inzidenz", engine='openpyxl')
     except:
     	helper.download_as_browser("https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Altersverteilung.xls?__blob=publicationFile", "data/source/Altersverteilung.xls")
     	df_age_original = pd.read_excel("data/source/Altersverteilung.xls", sheet_name="Fälle", engine='xlrd')
