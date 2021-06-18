@@ -157,7 +157,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(423.3,31.0)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-06-17)</tspan></text>
+		<text><tspan font-family="Arial" >Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-06-18)</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -232,7 +232,7 @@
 		L712.1,329.1 L713.3,339.6 L714.6,344.9 L715.9,346.5 L717.1,350.2 L718.4,355.8 L719.6,360.5 L720.9,377.8
 		L722.1,390.0 L723.4,392.9 L724.7,396.3 L725.9,402.1 L727.2,403.6 L728.4,403.8 L729.7,399.1 L731.0,402.6
 		L732.2,411.2 L733.5,417.6 L734.7,420.5 L736.0,422.3 L737.2,423.5 L738.5,426.9 L739.8,429.9 L741.0,431.3
-		L742.3,432.1 L743.5,434.1 L744.8,435.2 L746.0,436.4 L747.3,440.1 L748.6,443.9  '/></g>
+		L742.3,432.1 L743.5,434.1 L744.8,435.2 L746.0,436.4 L747.3,440.1 L748.6,443.9 L749.8,446.7  '/></g>
 	</g>
 	<g id="gnuplot_plot_2" ><title>Intensiv-CoV-Patienten</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -420,7 +420,7 @@
 		L712.1,461.4 L713.3,461.5 L714.6,461.4 L715.9,461.4 L717.1,461.4 L718.4,461.4 L719.6,461.8 L720.9,461.8
 		L722.1,461.8 L723.4,461.8 L724.7,461.8 L725.9,461.9 L727.2,461.9 L728.4,461.7 L729.7,461.9 L731.0,462.1
 		L732.2,462.3 L733.5,462.4 L734.7,462.3 L736.0,462.4 L737.2,462.4 L738.5,462.5 L739.8,462.7 L741.0,462.6
-		L742.3,462.6 L743.5,462.7 L744.8,462.8 L746.0,462.9 L747.3,462.8 L748.6,462.8  '/></g>
+		L742.3,462.6 L743.5,462.7 L744.8,462.8 L746.0,462.9 L747.3,462.8 L748.6,462.8 L749.8,462.8  '/></g>
 	</g>
 	<g id="gnuplot_plot_5" ><title>Personen mit Erstimpfung</title>
 <g fill="none" color="white" stroke="rgb(  0,   0,   0)" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
