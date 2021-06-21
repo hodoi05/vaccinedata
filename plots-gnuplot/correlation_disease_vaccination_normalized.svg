@@ -310,7 +310,7 @@
 		L723.0,332.8 L724.2,338.5 L725.5,342.7 L726.8,346.2 L728.0,354.8 L729.3,362.2 L730.6,368.1 L731.9,371.6
 		L733.1,375.4 L734.4,377.7 L735.7,380.8 L736.9,385.8 L738.2,391.2 L739.5,395.7 L740.7,400.4 L742.0,404.3
 		L743.3,404.7 L744.6,407.6 L745.8,411.3 L747.1,415.3 L748.4,418.8 L749.6,421.8 L750.9,424.1 L752.2,426.1
-		 '/></g>
+		L753.4,428.2  '/></g>
 	</g>
 	<g id="gnuplot_plot_3" ><title>Beatmete CoV-Patienten</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -371,7 +371,7 @@
 		L723.0,310.3 L724.2,314.5 L725.5,318.0 L726.8,325.7 L728.0,335.1 L729.3,343.6 L730.6,349.4 L731.9,352.3
 		L733.1,357.8 L734.4,361.7 L735.7,366.4 L736.9,371.1 L738.2,376.4 L739.5,380.3 L740.7,385.0 L742.0,388.2
 		L743.3,387.6 L744.6,392.4 L745.8,396.2 L747.1,400.1 L748.4,403.6 L749.6,407.5 L750.9,411.5 L752.2,414.1
-		 '/></g>
+		L753.4,416.4  '/></g>
 	</g>
 	<g id="gnuplot_plot_4" ><title>Todesfälle mit CoV pro Woche</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -553,7 +553,7 @@
 		L710.3,394.0 L711.5,393.1 L712.8,389.6 L714.1,388.6 L715.3,393.1 L716.6,395.7 L717.9,396.4 L719.1,395.9
 		L720.4,385.7 L721.7,375.1 L723.0,374.8 L724.2,375.9 L725.5,374.2 L726.8,377.8 L728.0,383.4 L729.3,393.8
 		L730.6,390.4 L731.9,382.5 L733.1,377.4 L734.4,378.6 L735.7,381.4 L736.9,384.6 L738.2,382.1 L739.5,379.3
-		 '/></g>
+		L740.7,380.4  '/></g>
 	</g>
 	<g id="gnuplot_plot_8" ><title>Verhältnis beatmete Patienten/Infektionen (mit deltaT)</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -614,7 +614,7 @@
 		L709.0,393.8 L710.3,393.8 L711.5,391.5 L712.8,389.5 L714.1,391.5 L715.3,395.3 L716.6,396.5 L717.9,394.8
 		L719.1,395.2 L720.4,384.5 L721.7,375.5 L723.0,376.5 L724.2,377.3 L725.5,373.3 L726.8,376.4 L728.0,379.5
 		L729.3,385.1 L730.6,385.9 L731.9,377.9 L733.1,371.7 L734.4,370.9 L735.7,373.3 L736.9,377.2 L738.2,373.8
-		 '/></g>
+		L739.5,370.6  '/></g>
 	</g>
 	<g id="gnuplot_plot_9" ><title>Verhältnis Todesfälle/Infektionen (mit deltaT)</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
