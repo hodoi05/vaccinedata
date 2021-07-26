@@ -183,7 +183,7 @@
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(419.9,31.0)" stroke="none" fill="black" font-family="Arial" font-size="12.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Normalisierter Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-07-25)</tspan></text>
+		<text><tspan font-family="Arial" >Normalisierter Verlauf Covid Infektionen und Impfkampagne (Stand: 2021-07-26)</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -261,7 +261,7 @@
 		L693.3,456.6 L694.4,456.6 L695.6,457.0 L696.7,457.2 L697.9,457.4 L699.0,457.2 L700.2,457.2 L701.3,457.2
 		L702.4,457.2 L703.6,456.9 L704.7,456.7 L705.9,456.3 L707.0,455.8 L708.2,455.5 L709.3,455.3 L710.4,455.0
 		L711.6,454.1 L712.7,453.0 L713.9,452.2 L715.0,451.1 L716.2,450.2 L717.3,449.9 L718.5,449.0 L719.6,447.9
-		L720.7,447.5 L721.9,446.5 L723.0,446.0 L724.2,445.9  '/></g>
+		L720.7,447.5 L721.9,446.5 L723.0,446.0 L724.2,445.9 L725.3,445.2  '/></g>
 	</g>
 	<g id="gnuplot_plot_2" ><title>Intensiv-CoV-Patienten</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -464,7 +464,7 @@
 		L693.3,446.9 L694.4,447.8 L695.6,447.6 L696.7,449.0 L697.9,448.6 L699.0,451.1 L700.2,451.1 L701.3,451.4
 		L702.4,452.7 L703.6,453.0 L704.7,454.5 L705.9,455.5 L707.0,454.6 L708.2,454.6 L709.3,454.6 L710.4,454.8
 		L711.6,455.7 L712.7,455.7 L713.9,457.1 L715.0,457.7 L716.2,457.9 L717.3,457.9 L718.5,457.6 L719.6,458.0
-		L720.7,457.5 L721.9,456.8 L723.0,456.5 L724.2,456.4  '/></g>
+		L720.7,457.5 L721.9,456.8 L723.0,456.5 L724.2,456.4 L725.3,456.3  '/></g>
 	</g>
 	<g id="gnuplot_plot_5" ><title>Personen mit Erstimpfung</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -711,7 +711,7 @@
 		L673.9,342.2 L675.0,361.0 L676.1,353.7 L677.3,352.0 L678.4,359.6 L679.6,345.7 L680.7,342.1 L681.9,335.6
 		L683.0,304.1 L684.2,288.9 L685.3,282.2 L686.4,281.4 L687.6,288.8 L688.7,277.2 L689.9,303.3 L691.0,302.4
 		L692.2,295.3 L693.3,291.6 L694.4,277.8 L695.6,282.0 L696.7,260.8 L697.9,228.2 L699.0,223.5 L700.2,223.2
-		 '/></g>
+		L701.3,219.6  '/></g>
 	</g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
