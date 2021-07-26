@@ -421,7 +421,7 @@
 		L637.6,325.9 L638.8,325.3 L639.9,326.7 L641.0,329.0 L642.2,323.6 L643.3,315.6 L644.5,313.2 L645.6,303.6
 		L646.8,301.8 L647.9,303.1 L649.0,307.1 L650.2,305.7 L651.3,302.4 L652.5,296.8 L653.6,310.7 L654.8,315.2
 		L655.9,315.3 L657.0,322.8 L658.2,331.3 L659.3,334.3 L660.5,342.8 L661.6,352.2 L662.8,357.4 L663.9,360.2
-		L665.0,363.2 L666.2,372.7 L667.3,378.1  '/></g>
+		L665.0,363.2 L666.2,372.7 L667.3,378.1 L668.5,384.0  '/></g>
 	</g>
 	<g id="gnuplot_plot_2b" ><title>Verhältnis beatmete Patienten/Infektionen (mit deltaT)</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -486,7 +486,7 @@
 		L636.5,378.1 L637.6,375.2 L638.8,370.8 L639.9,373.5 L641.0,375.8 L642.2,371.3 L643.3,367.5 L644.5,369.8
 		L645.6,368.2 L646.8,364.0 L647.9,363.3 L649.0,365.6 L650.2,366.2 L651.3,359.9 L652.5,362.4 L653.6,366.1
 		L654.8,368.9 L655.9,373.9 L657.0,377.6 L658.2,379.7 L659.3,384.2 L660.5,393.5 L661.6,399.5 L662.8,404.2
-		L663.9,405.7 L665.0,409.3 L666.2,413.5  '/></g>
+		L663.9,405.7 L665.0,409.3 L666.2,413.5 L667.3,419.0  '/></g>
 	</g>
 	<g id="gnuplot_plot_3b" ><title>Verhältnis Todesfälle/Infektionen (mit deltaT)</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
