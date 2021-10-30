@@ -1,1 +1,1 @@
-deltaT: Infektion-Intensiv:11d, Infektion-Beatmung: 12d, Infektion-Tod: 0d
+deltaT: Infektion-Intensiv:310d, Infektion-Beatmung: 310d, Infektion-Tod: 0d
