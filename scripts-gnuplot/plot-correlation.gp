@@ -50,6 +50,7 @@ plot \
   '../data/df_all.csv' using (column("Datum")):(column("Todesfälle mit CoV pro Woche")) title "Todesfälle mit CoV pro Woche" with lines lw 2 lt rgb "black", \
   '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" with lines lw 1 lt rgb "dark-cyan", \
   '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" with lines lw 1 lt rgb "web-blue", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Auffrischung")) title "Personen mit Vollschutz" with lines lw 1 lt rgb "royalblue", \
 
 unset output
 
@@ -62,6 +63,7 @@ plot \
   '../data/df_all.csv' using (column("Datum")):(column("Todesfälle mit CoV pro Woche")) title "Todesfälle mit CoV pro Woche" with lines lw 2 lt rgb "black", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" with lines lw 1 lt rgb "dark-cyan", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" with lines lw 1 lt rgb "web-blue", \
+  '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Auffrischung")) title "Personen mit Auffrischung" with lines lw 1 lt rgb "royalblue", \
 
 unset output
 
@@ -72,7 +74,7 @@ set ylabel "min/max normalisiert"
 set label 1 label1_text_right.delta_t."\r\nQuellen: https://github.com/entorb, https://github.com/ard-data, https://www.divi.de"
 
 set yrange [0:1.4]
-set terminal svg size 800,500
+set terminal svg size 800,750
 
 set output '../plots-gnuplot/correlation_disease_vaccination_normalized.svg'
 
@@ -84,6 +86,7 @@ plot \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Todesfälle mit CoV pro Woche")) title "Todesfälle mit CoV pro Woche" with lines lw 1  lt rgb "black", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" with lines lw 1 lt rgb "dark-cyan", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" with lines lw 1 lt rgb "web-blue", \
+  '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Auffrischung")) title "Personen mit Auffrischung" with lines lw 1 lt rgb "royalblue", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Verhältnis Intensivpatienten/Infektionen (mit deltaT)")) title "Verhältnis Intensivpatienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "goldenrod", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Verhältnis beatmete Patienten/Infektionen (mit deltaT)")) title "Verhältnis beatmete Patienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "red", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Verhältnis Todesfälle/Infektionen (mit deltaT)")) title "Verhältnis Todesfälle/Infektionen (mit deltaT)" with lines lw 2 lt rgb "black", \
@@ -99,6 +102,7 @@ plot \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Todesfälle mit CoV pro Woche")) title "Todesfälle mit CoV pro Woche" with lines lw 1  lt rgb "black", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" with lines lw 1 lt rgb "dark-cyan", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" with lines lw 1 lt rgb "web-blue", \
+  '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Personen mit Auffrischung")) title "Personen mit Auffrischung" with lines lw 1 lt rgb "royalblue", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Verhältnis Intensivpatienten/Infektionen (mit deltaT)")) title "Verhältnis Intensivpatienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "goldenrod", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Verhältnis beatmete Patienten/Infektionen (mit deltaT)")) title "Verhältnis beatmete Patienten/Infektionen (mit deltaT)" with lines lw 2 lt rgb "red", \
   '../data/df_all_min_max_scaled.csv' using (column("Datum")):(column("Verhältnis Todesfälle/Infektionen (mit deltaT)")) title "Verhältnis Todesfälle/Infektionen (mit deltaT)" with lines lw 2 lt rgb "black", \
@@ -133,6 +137,7 @@ set ylabel "Geimpfte Personen" offset 80,0 textcolor rgb "blue"
 plot \
   '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" at 0.75,0.71 with lines lw 1 lt rgb "dark-cyan", \
   '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.75,0.68 with lines lw 1 lt rgb "web-blue", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Auffrischung")) title "Personen mit Auffrischung" at 0.75,0.68 with lines lw 1 lt rgb "royalblue", \
 
 
 set style line 50 lt 1 lc rgb "black" lw 2
@@ -177,7 +182,8 @@ set multiplot
 
 plot \
   '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" at 0.75,0.83 with lines lw 1 lt rgb "dark-cyan", \
-  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.75,0.80 with lines lw 1 lt rgb "web-blue"
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.75,0.80 with lines lw 1 lt rgb "web-blue", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Auffrischung")) title "Personen mit Auffrischung" at 0.75,0.77 with lines lw 1 lt rgb "royalblue", \
 
 set style line 50 lt 1 lc rgb "black" lw 2
 set border ls 50

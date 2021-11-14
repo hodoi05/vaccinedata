@@ -33,6 +33,7 @@ col_beatmet='Beatmete CoV-Patienten'
 col_tod='Todesfälle mit CoV pro Woche'
 col_erstimpfung='Personen mit Erstimpfung'
 col_vollschutz='Personen mit Vollschutz'
+col_auffrischung='Personen mit Auffrischung'
 col_ratio_intensiv='Verhältnis Intensivpatienten/Infektionen (mit deltaT)'
 col_ratio_beatmet='Verhältnis beatmete Patienten/Infektionen (mit deltaT)'
 col_ratio_tod='Verhältnis Todesfälle/Infektionen (mit deltaT)'
@@ -55,21 +56,21 @@ d_bl_id2code = {'01': 'SH', '02': 'HH', '03': 'NI', '04': 'HB', '05': 'NW', '06'
                 '08': 'BW', '09': 'BY', '10': 'SL', '11': 'BE', '12': 'BB', '13': 'MV', '14': 'SN', '15': 'ST', '16': 'TH', 'DE-total': 'DE-total'}
 
 
-def fetch_latest_csvs():
+def fetch_latest_csv():
     """
-    fetches the 5 latest files from https://www.divi.de/divi-intensivregister-tagesreport-archiv-csv?layout=table
-    only keeps the latest file per day
+    fetches the latest (top) file from https://www.divi.de/divi-intensivregister-tagesreport-archiv-csv?layout=table
+    output: latest.csv (overwrites old file)
     """
 
     url = 'https://www.divi.de/divi-intensivregister-tagesreport-archiv-csv?layout=table'
-    cachefile = 'cache/de-divi/list-csv-page-1.html'
+    file = 'cache/de-divi/list-csv-page-1.html'
     payload = {"filter_order_Dir": "DESC",
                "filter_order": "tbl.ordering",
                "start": 0}
     # "cid[]": "0", "category_id": "54", "task": "", "8ba87835776d29f4e379a261512319f1": "1"
 
     cont = helper.read_url_or_cachefile(
-        url=url, cachefile=cachefile, request_type='post', payload=payload, cache_max_age=3600, verbose=True)
+        url=url, cachefile=file, request_type='post', payload=payload, cache_max_age=3600, verbose=True)
 
     # extract link of from <a href="/divi-intensivregister-tagesreport-archiv-csv/divi-intensivregister-2020-06-28-12-15/download"
 
@@ -80,93 +81,78 @@ def fetch_latest_csvs():
     # while len(l_csv_urls) > 5:
     #     l_csv_urls.pop()
 
-    d_csvs_to_fetch = {}
+    d_csvs_in_table = {}
 
     # loop over urls to replace outdated files by latest file per day
     # '/divi-intensivregister-tagesreport-archiv-csv/divi-intensivregister-2020-06-25-12-15/download'
     # '/divi-intensivregister-tagesreport-archiv-csv/divi-intensivregister-2020-06-25-12-15-2/download'
     for url in l_csv_urls:
         url = f"https://www.divi.de{url}"
-        '/divi-intensivregister-tagesreport-archiv-csv/viewdocument/5330/divi-intensivregister-2020-12-21-12-15'
+        # '/divi-intensivregister-tagesreport-archiv-csv/viewdocument/5330/divi-intensivregister-2020-12-21-12-15'
         filename = re.search(
             r'/divi-intensivregister-tagesreport-archiv-csv/viewdocument/\d+?/divi-intensivregister-(\d{4}\-\d{2}\-\d{2})[^/]', url).group(1)
-        d_csvs_to_fetch[filename] = url
-    del l_csv_urls
+        d_csvs_in_table[filename] = url
+    del l_csv_urls, filename, url
 
-    assert len(d_csvs_to_fetch) > 0, "Error: no files to fetch"
-    for filename, url in d_csvs_to_fetch.items():
-        cachefile = f"data/source/de-divi/{filename}.csv"
+    l = sorted(d_csvs_in_table.keys())
+    latest_filename = l[-1]
+    latest_url = d_csvs_in_table[latest_filename]
+    file = f"data/source/de-divi/latest.csv"
+
+    if not os.path.isfile(file):
         cont = helper.read_url_or_cachefile(
-            url=url, cachefile=cachefile, request_type='get', payload={}, cache_max_age=3600, verbose=True)
+            url=latest_url, cachefile=file, request_type='get', payload={}, cache_max_age=3600, verbose=True)
 
 
 def generate_database() -> dict:
+    """ from 2021-10-29 on Divi publisheds all data in the latest file"""
+    d_database = {}
     d_database_states = {'01': {}, '02': {}, '03': {}, '04': {}, '05': {}, '06': {}, '07': {
     }, '08': {}, '09': {}, '10': {}, '11': {}, '12': {}, '13': {}, '14': {}, '15': {}, '16': {}, 'DE-total': {}}
-    for csv_file in glob.glob('data/source/de-divi/*.csv'):
-        (filepath, fileName) = os.path.split(csv_file)
-        (fileBaseName, fileExtension) = os.path.splitext(fileName)
-        date = fileBaseName
-        del filepath, fileName, fileBaseName, fileExtension
+    csv_file = 'data/source/de-divi/latest.csv'
 
-# file 2020-04-24.csv:
-# bundesland,kreis,anzahl_standorte,betten_frei,betten_belegt,faelle_covid_aktuell_im_bundesland
-# file 2020-04-26.csv:
-# gemeindeschluessel,anzahl_meldebereiche,faelle_covid_aktuell,faelle_covid_aktuell_beatmet,anzahl_standorte,betten_frei,betten_belegt,bundesland
-# 2020-04-28.csv
-# gemeindeschluessel,anzahl_meldebereiche,faelle_covid_aktuell,faelle_covid_aktuell_beatmet,anzahl_standorte,betten_frei,betten_belegt,bundesland,daten_stand
-# file 2020-06-28.csv
-# bundesland,gemeindeschluessel,anzahl_meldebereiche,faelle_covid_aktuell,faelle_covid_aktuell_beatmet,anzahl_standorte,betten_frei,betten_belegt,daten_stand
+    with open(csv_file, mode='r', encoding='utf-8') as f:
+        csv_reader = csv.DictReader(f, delimiter=",")
+        for row in csv_reader:
+            date = row["date"]
+            assert len(row) >= 8, "Error: too few rows found"
+            bl_id = row["bundesland"]
+            divi_col_beatmet="faelle_covid_aktuell_invasiv_beatmet"
+            datetime_date = datetime.datetime.strptime(date, "%Y-%m-%d")
+            d = {
+                "Date": date,
+                "anzahl_meldebereiche": int(row["anzahl_meldebereiche"]),
+                "faelle_covid_aktuell": int(row["faelle_covid_aktuell"]),
+                "faelle_covid_aktuell_beatmet": int(row[divi_col_beatmet]),
+                "anzahl_standorte": int(row["anzahl_standorte"]),
+                "betten_frei": int(float(row["betten_frei"])),
+                "betten_belegt": int(float(row["betten_belegt"]))
+            }
+            if "faelle_covid_aktuell_beatmet" in row:
+                d["faelle_covid_aktuell_beatmet"] = int(
+                    row["faelle_covid_aktuell_beatmet"])
+            elif "faelle_covid_aktuell_invasiv_beatmet" in row:
+                d["faelle_covid_aktuell_beatmet"] = int(
+                    row["faelle_covid_aktuell_invasiv_beatmet"])
+            
+            d["betten_ges"] = d["betten_frei"] + d["betten_belegt"]
 
-
-# -> skipping file 2020-04-24.csv and 2020-04-25.csv
-        if date in ('2020-04-24', '2020-04-25'):
-            continue
-
-        with open(csv_file, mode='r', encoding='utf-8') as f:
-            csv_reader = csv.DictReader(f, delimiter=",")
-            for row in csv_reader:
-                assert len(row) >= 8, "Error: too few rows found"
-                bl_id = row["bundesland"]
-                divi_col_beatmet="faelle_covid_aktuell_invasiv_beatmet"
-                datetime_date = datetime.datetime.strptime(date, "%Y-%m-%d")
-                if datetime_date < datetime.datetime(2021,3,31):           
-                    divi_col_beatmet = "faelle_covid_aktuell_beatmet"
-                d = {
-                    # "bl_id": row["bundesland"],
-                    # "lk_id": row["gemeindeschluessel"],
-                    "Date": date,
-                    "anzahl_meldebereiche": int(row["anzahl_meldebereiche"]),
-                    "faelle_covid_aktuell": int(row["faelle_covid_aktuell"]),
-                    "faelle_covid_aktuell_beatmet": int(row[divi_col_beatmet]),
-                    "anzahl_standorte": int(row["anzahl_standorte"]),
-                    "betten_frei": int(float(row["betten_frei"])),
-                    "betten_belegt": int(float(row["betten_belegt"]))
-                }
-                d["betten_ges"] = d["betten_frei"] + d["betten_belegt"]
-
-
-                # if "daten_stand" in row:
-                #     d["daten_stand"] = row["daten_stand"]
-                # else:
-                #     d["daten_stand"] = date
-
-                # calc de_states_sum
-                d2 = dict(d)
-                del d2['Date']
-                if date not in d_database_states[bl_id]:
-                    d_database_states[bl_id][date] = d2
-                else:
-                    for k in d2.keys():
-                        d_database_states[bl_id][date][k] += d2[k]
-                # 'DE-total'
-                if date not in d_database_states['DE-total']:
-                    d_database_states['DE-total'][date] = d2
-                else:
-                    for k in d2.keys():
-                        d_database_states['DE-total'][date][k] += d2[k]
-                d2['Date']=date                
-                # print(d_database_states[bl_id][date])
+            # calc de_states_sum
+            d2 = dict(d)
+            del d2['Date']
+            if date not in d_database_states[bl_id]:
+                d_database_states[bl_id][date] = d2
+            else:
+                for k in d2.keys():
+                    d_database_states[bl_id][date][k] += d2[k]
+            # 'DE-total'
+            if date not in d_database_states['DE-total']:
+                d_database_states['DE-total'][date] = d2
+            else:
+                for k in d2.keys():
+                    d_database_states['DE-total'][date][k] += d2[k]
+            d2['Date']=date                
+            # print(d_database_states[bl_id][date])
 
     return d_database_states
 
@@ -187,10 +173,18 @@ def export_csv(d_database):
     pass
 
 def df_addcol_peakrefrelatedratio(df,col_a, col_b, col_deltaratio):
-  peakdate_a = df[df[col_a]==df[col_a].max()][col_date].min()
-  peakdate_b = df[df[col_b]==df[col_b].max()][col_date].min()
+  dfrelevant=df[(df[col_date] <= datetime.datetime.strptime("2021-05-01", "%Y-%m-%d"))].copy()
+  peakdate_a = dfrelevant[dfrelevant[col_a]==dfrelevant[col_a].max()][col_date].min()
+  peakdate_b = dfrelevant[dfrelevant[col_b]==dfrelevant[col_b].max()][col_date].min()
   deltat = peakdate_b - peakdate_a
- 
+  
+  if col_b==col_intensiv:
+      deltat = datetime.timedelta(days = 10)
+  if col_b==col_beatmet:
+      deltat = datetime.timedelta(days = 11)
+  if col_b==col_tod:
+      deltat = datetime.timedelta(days = 15)
+  
   col_refval = f'{col_b} -{deltat}d (peak matched)'
   df_deltat = df[[col_date, col_b]].copy()
   df_deltat[col_date] = df_deltat[col_date]-deltat
@@ -207,7 +201,7 @@ def calc_efficiency(df):
    df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_intensiv, col_ratio_intensiv)
    df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_beatmet, col_ratio_beatmet)
    df = df_addcol_peakrefrelatedratio(df, col_infectionsperweek, col_tod, col_ratio_tod)
-   # Pre 2020-04-15 not ennough data has been gathered => set to nan
+   # Pre 2020-04-15 not enough data has been gathered => set to nan
    df[col_ratio_tod][df[col_date] < pd.to_datetime('2020-04-15')] = np.nan
 
    fileOut = "data/peak_deltat.txt"
@@ -275,23 +269,26 @@ df_age = retrieve_ageincidents()
 df_age.to_csv('data/df_age.csv', index=False)
 
 
-fetch_latest_csvs()
+fetch_latest_csv()
 d_database = generate_database()
 export_csv(d_database)
 
 df_divi = pd.read_csv('data/source/de-divi-bl/DE-total.csv')
-df_vaccine = pd.read_csv('data/source/all-vaccine.csv')
+df_vaccine = pd.read_csv('data/source/all-vaccine-region_DE.csv')
+
 df_vaccine = df_vaccine.rename(columns={"date":'Date'})
-df_vaccine_DE = df_vaccine[df_vaccine["region"] == "DE"]
-df_vaccine_personen_erst = df_vaccine_DE[df_vaccine_DE["metric"] == 'personen_erst_kumulativ'].copy().reset_index(drop=True)
-df_vaccine_personen_voll = df_vaccine_DE[df_vaccine_DE["metric"] == "personen_voll_kumulativ"].copy().reset_index(drop=True)
+df_vaccine_personen_erst = df_vaccine[["Date","personen_erst_kumulativ"]].copy().reset_index(drop=True)
+df_vaccine_personen_voll = df_vaccine[["Date","personen_voll_kumulativ"]].copy().reset_index(drop=True)
+df_vaccine_personen_auffr = df_vaccine[["Date","personen_auffr_kumulativ"]].copy().reset_index(drop=True)
 df_infections = pd.read_csv('data/source/de-state-DE-total-infections.tsv', sep='\t')
 
 df_all = pd.merge(df_infections, df_divi, on='Date', how='left')
-df_vaccine_personen_erst = df_vaccine_personen_erst.rename(columns={"value":col_erstimpfung})
+df_vaccine_personen_erst = df_vaccine_personen_erst.rename(columns={"personen_erst_kumulativ":col_erstimpfung})
 df_all = pd.merge(df_all, df_vaccine_personen_erst, on='Date', how='left')
-df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"value":col_vollschutz})
+df_vaccine_personen_voll = df_vaccine_personen_voll.rename(columns={"personen_voll_kumulativ":col_vollschutz})
 df_all = pd.merge(df_all, df_vaccine_personen_voll, on='Date', how='left')
+df_vaccine_personen_auffr = df_vaccine_personen_auffr.rename(columns={"personen_auffr_kumulativ":col_auffrischung})
+df_all = pd.merge(df_all, df_vaccine_personen_auffr, on='Date', how='left')
 
 df_all = df_all.rename(columns={"Date":col_date})
 df_all = df_all.rename(columns={"Cases_Last_Week":col_infectionsperweek})
@@ -311,6 +308,7 @@ df_all = df_all[[col_date,
   col_tod,
   col_erstimpfung,
   col_vollschutz,
+  col_auffrischung,
   col_ratio_intensiv,
   col_ratio_beatmet,
   col_ratio_tod]]
@@ -327,7 +325,8 @@ for column in [col_infectionsperweek,
   col_beatmet,
   col_tod,
   col_erstimpfung,
-  col_vollschutz]:
+  col_vollschutz,
+  col_auffrischung]:
     df_min_max_scaled[column] = (df_min_max_scaled[column] - df_min_max_scaled[column].min()) / (df_min_max_scaled[column].max() - df_min_max_scaled[column].min())     
 
 df_min_max_scaled = calc_efficiency(df_min_max_scaled)

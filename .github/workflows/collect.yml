@@ -24,8 +24,8 @@ jobs:
           echo Retrieve data for total number of infections data from https://raw.githubusercontent.com/entorb/COVID-19-Coronavirus-German-Regions/master/data/de-states/de-state-DE-total.tsv,
           wget -O data/source/de-state-DE-total-infections.tsv https://raw.githubusercontent.com/entorb/COVID-19-Coronavirus-German-Regions/master/data/de-states/de-state-DE-total.tsv
           
-          echo Retrieve vaccinination rates from https://raw.githubusercontent.com/ard-data/2020-rki-impf-archive/master/data/9_csv_v2/all.csv
-          wget -O data/source/all-vaccine.csv https://raw.githubusercontent.com/ard-data/2020-rki-impf-archive/master/data/9_csv_v2/all.csv
+          echo Retrieve vaccine info from https://raw.githubusercontent.com/ard-data/2020-rki-impf-archive/master/data/9_csv_v3/region_DE.csv
+          wget -O data/source/all-vaccine-region_DE.csv https://raw.githubusercontent.com/ard-data/2020-rki-impf-archive/master/data/9_csv_v3/region_DE.csv
 
       - name: Python Setup
         uses: actions/setup-python@v2
