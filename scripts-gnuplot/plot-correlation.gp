@@ -137,7 +137,7 @@ set ylabel "Geimpfte Personen" offset 80,0 textcolor rgb "blue"
 plot \
   '../data/df_all.csv' using (column("Datum")):(column("Personen mit Erstimpfung")) title "Personen mit Erstimpfung" at 0.75,0.71 with lines lw 1 lt rgb "dark-cyan", \
   '../data/df_all.csv' using (column("Datum")):(column("Personen mit Vollschutz")) title "Personen mit Vollschutz" at 0.75,0.68 with lines lw 1 lt rgb "web-blue", \
-  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Auffrischung")) title "Personen mit Auffrischung" at 0.75,0.68 with lines lw 1 lt rgb "royalblue", \
+  '../data/df_all.csv' using (column("Datum")):(column("Personen mit Auffrischung")) title "Personen mit Auffrischung" at 0.75,0.65 with lines lw 1 lt rgb "royalblue", \
 
 
 set style line 50 lt 1 lc rgb "black" lw 2
