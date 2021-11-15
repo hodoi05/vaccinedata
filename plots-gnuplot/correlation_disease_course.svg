@@ -275,12 +275,12 @@
 	</g>
 	<g id="gnuplot_plot_3a" ><title>Personen mit Auffrischung</title>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<g transform="translate(599.9,164.0)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
+	<g transform="translate(599.9,179.0)" stroke="none" fill="black" font-family="Verdana" font-size="12.00"  text-anchor="end">
 		<text><tspan font-family="Verdana" >Personen mit Auffrischung</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='rgb( 65, 105, 225)'  d='M608.2,160.1 L650.4,160.1 M618.3,463.4 L619.2,463.3 L622.0,463.1 L623.0,463.0 L623.9,462.9 L624.8,462.7
+	<path stroke='rgb( 65, 105, 225)'  d='M608.2,175.1 L650.4,175.1 M618.3,463.4 L619.2,463.3 L622.0,463.1 L623.0,463.0 L623.9,462.9 L624.8,462.7
 		L625.8,462.5 L628.6,462.3 L629.5,462.2 L630.4,462.0 L631.4,461.8 L632.3,461.5 L635.1,461.3 L636.0,461.1
 		L637.0,460.9 L637.9,460.7 L638.8,460.5 L641.6,460.3 L642.6,460.3 L643.5,460.1 L644.4,459.8 L645.4,459.6
 		L648.2,459.3 L649.1,459.2 L650.0,459.0 L651.0,458.7 L651.9,458.4 L654.7,458.2 L655.6,458.1 L656.6,457.8
